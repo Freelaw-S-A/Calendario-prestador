@@ -1,4 +1,4 @@
-# 📅 Calendário Prestador - Freelaw
+# 📅 Calendário Prestador - Freelaw.
 
 Painel de prazos de entrega para prestadores da plataforma Freelaw
 
