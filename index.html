@@ -719,57 +719,22 @@
         /*
          * CONFIGURAÇÃO DA API DO METABASE
          */
-        // Usar proxy local para evitar CORS
-        const METABASE_PUBLIC_URL = '/api/metabase';
-
         let sampleEvents = [];
 
-        // Função para buscar dados da API do Metabase
+        // Função para buscar dados da Query Pública do Metabase
         async function fetchPrestadorData(email) {
             try {
-                // DADOS REAIS: Se for pedralgabriela@gmail.com, retornar os prazos do banco
-                if (email === 'pedralgabriela@gmail.com') {
-                    console.log('✅ Carregando dados reais para pedralgabriela@gmail.com');
-                    const dadosReais = [
-                        { "ID da OS": 146006, "Nome da OS": "Recurso Inominado Rubens da Costa", "Data Prazo": "2025-11-19T23:59:59.252742-03:00", "Tipo Prazo": "Primeira Entrega", "Status": null },
-                        { "ID da OS": 147304, "Nome da OS": "Alexandre - Contrarrazões", "Data Prazo": "2025-11-19T23:59:59.530968-03:00", "Tipo Prazo": "Primeira Entrega", "Status": null },
-                        { "ID da OS": 146857, "Nome da OS": "RÉPLICA MATHEUS VINICIUS", "Data Prazo": "2025-11-19T23:59:59.688399-03:00", "Tipo Prazo": "Primeira Revisão", "Status": null },
-                        { "ID da OS": 147308, "Nome da OS": "0011133-70.2024.5.18.0002 - RO", "Data Prazo": "2025-11-19T23:59:59.842097-03:00", "Tipo Prazo": "Primeira Entrega", "Status": null },
-                        { "ID da OS": 147223, "Nome da OS": "RAFAEL e JESSICA", "Data Prazo": "2025-11-20T23:59:59.034152-03:00", "Tipo Prazo": "Primeira Revisão", "Status": null },
-                        { "ID da OS": 147707, "Nome da OS": "RÉPLICA RICARDO", "Data Prazo": "2025-11-20T23:59:59.549817-03:00", "Tipo Prazo": "Primeira Entrega", "Status": null },
-                        { "ID da OS": 147723, "Nome da OS": "Apelação - Douglas lima X Google", "Data Prazo": "2025-11-20T23:59:59.658269-03:00", "Tipo Prazo": "Primeira Entrega", "Status": null },
-                        { "ID da OS": 144803, "Nome da OS": "Camila - Estudo Prev Maria Janete Herrmann", "Data Prazo": "2025-11-20T23:59:59.672587-03:00", "Tipo Prazo": "Primeira Revisão", "Status": null }
-                    ];
+                // Construir URL da query pública do Metabase
+                const publicCardId = '3ff19457-e51c-4bb9-8cc3-95421ed40559';
+                const parameters = encodeURIComponent(JSON.stringify([{
+                    "type": "category",
+                    "target": ["variable", ["template-tag", "email"]],
+                    "value": email
+                }]));
 
-                    // Transformar para o formato do painel
-                    const eventos = dadosReais.map(row => {
-                        let type = 'entrega';
-                        const tipoPrazo = row["Tipo Prazo"];
-
-                        if (tipoPrazo && (tipoPrazo.toLowerCase().includes('revisão') || tipoPrazo.toLowerCase().includes('revisao'))) {
-                            type = 'revisao';
-                        }
-
-                        return {
-                            date: new Date(row["Data Prazo"]),
-                            type: type,
-                            title: `OS #${row["ID da OS"]}`,
-                            osName: row["Nome da OS"],
-                            status: row["Status"],
-                            urgencia: 'Normal',
-                            tipoPrazo: tipoPrazo
-                        };
-                    });
-
-                    console.log(`✅ ${eventos.length} prazos carregados (${eventos.filter(e => e.type === 'entrega').length} entregas, ${eventos.filter(e => e.type === 'revisao').length} revisões)`);
-                    return eventos;
-                }
-
-                // Construir URL com parâmetro de e-mail
-                const url = `${METABASE_PUBLIC_URL}?email=${encodeURIComponent(email)}`;
+                const url = `https://metrics.freelaw.work/api/public/card/${publicCardId}/query/json?parameters=${parameters}`;
 
                 console.log('🚀 Iniciando busca de dados...');
-                console.log('📍 URL:', url);
                 console.log('📧 E-mail buscado:', email);
 
                 // Fazer requisição para o Metabase (GET para URL pública)
