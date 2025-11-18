@@ -729,14 +729,18 @@
 
                 // Usar formato simples de parâmetro conforme a URL pública
                 // A API retorna JSON diretamente quando usamos /query/json
-                const url = `https://metrics.freelaw.work/api/public/card/${publicCardId}/query/json?email=${encodeURIComponent(email)}`;
+                const metabaseUrl = `https://metrics.freelaw.work/api/public/card/${publicCardId}/query/json?email=${encodeURIComponent(email)}`;
+
+                // Usar proxy CORS para evitar bloqueio
+                const corsProxy = 'https://corsproxy.io/?';
+                const url = corsProxy + encodeURIComponent(metabaseUrl);
 
                 console.log('🚀 Iniciando busca de dados...');
                 console.log('📧 E-mail buscado:', email);
-                console.log('🔗 URL da consulta:', url);
+                console.log('🔗 URL da consulta:', metabaseUrl);
+                console.log('🔓 URL com proxy CORS:', url);
 
-                // Fazer requisição para o Metabase (GET para URL pública)
-                // Não usar headers para evitar preflight CORS
+                // Fazer requisição para o Metabase através do proxy CORS
                 const response = await fetch(url);
 
                 console.log('📡 Status da resposta:', response.status, response.statusText);
