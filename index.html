@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelaw - Painel do Prestador</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #000000;
+            --bg-surface: #1d1d1f;
+            --text-primary: #f5f5f7;
+            --text-secondary: #a1a1a6;
+            --accent-purple: #5527ad;
+            --accent-gold: #ECB43D;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 48px;
+            --spacing-xl: 80px;
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-pill: 980px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.47;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 22px;
+        }
+
+        /* Header */
+        .header {
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Login Section */
+        .login-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            text-align: center;
+        }
+
+        .login-card {
+            background: var(--bg-surface);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+        }
+
+        .login-title {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -0.022em;
+            margin-bottom: 12px;
+            background: linear-gradient(180deg, var(--text-primary), var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .login-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+            color: var(--text-secondary);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px rgba(236, 180, 61, 0.1);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 12px 28px;
+            background: var(--accent-gold);
+            color: #000;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+            margin-top: 8px;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(236, 180, 61, 0.3);
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: none;
+        }
+
+        .dashboard.active {
+            display: block;
+        }
+
+        .dashboard-header {
+            margin-bottom: var(--spacing-xl);
+            text-align: center;
+            position: relative;
+        }
+
+        .welcome-text {
+            font-size: 48px;
+            font-weight: 800;
+            letter-spacing: -0.022em;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .user-email {
+            color: var(--text-secondary);
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .warning-text {
+            color: #fbbf24;
+            font-size: 14px;
+            line-height: 1.7;
+            margin: 20px 0;
+            padding: 16px 24px;
+            background: rgba(251, 191, 36, 0.08);
+            border: 1px solid rgba(251, 191, 36, 0.25);
+            border-radius: var(--radius-md);
+            text-align: left;
+            display: inline-block;
+            max-width: 700px;
+        }
+
+        .btn-logout {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 8px 20px;
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-pill);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+        }
+
+        .btn-logout:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-card {
+            background: var(--bg-surface);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+            position: relative;
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-2px);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--accent-gold);
+        }
+
+        /* Alerta vermelho para prazo urgente */
+        .stat-card.urgent {
+            border-color: #ff4444;
+            background: rgba(255, 68, 68, 0.1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .stat-card.urgent .stat-value {
+            color: #ff4444;
+        }
+
+        .stat-card.urgent .stat-label {
+            color: #ff4444;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 20px 10px rgba(255, 68, 68, 0);
+            }
+        }
+
+        /* Tooltip para stat-card */
+        .stat-tooltip {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            background: var(--bg-surface);
+            border: 1px solid var(--accent-gold);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            min-width: 250px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+            pointer-events: none;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .stat-card:hover .stat-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(4px);
+        }
+
+        .stat-tooltip-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+        }
+
+        .stat-tooltip-info {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .stat-tooltip-date {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Calendar */
+        .calendar-section {
+            background: var(--bg-surface);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            border: 1px solid rgba(85, 39, 173, 0.2);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .calendar-title {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.022em;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .btn-nav {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .btn-nav:hover {
+            border-color: var(--accent-purple);
+            background: rgba(85, 39, 173, 0.1);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: var(--spacing-xs);
+        }
+
+        .calendar-day-header {
+            text-align: center;
+            padding: var(--spacing-sm);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-xs);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+            position: relative;
+        }
+
+        .calendar-day:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .calendar-day.other-month {
+            opacity: 0.3;
+        }
+
+        .calendar-day.today {
+            border-color: var(--accent-gold);
+            background: rgba(236, 180, 61, 0.1);
+        }
+
+        .calendar-day.has-events {
+            background: rgba(220, 38, 38, 0.3);
+            border-color: rgba(220, 38, 38, 0.5);
+        }
+
+        .calendar-day.has-events:hover {
+            background: rgba(220, 38, 38, 0.4);
+            border-color: rgba(220, 38, 38, 0.7);
+        }
+
+        .day-number {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .day-indicator {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin-top: 4px;
+        }
+
+        .indicator-entrega {
+            background: var(--accent-gold);
+        }
+
+        .indicator-revisao {
+            background: var(--accent-purple);
+        }
+
+        .indicator-both {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-purple));
+        }
+
+        /* Tooltip */
+        .calendar-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-8px);
+            background: var(--bg-surface);
+            border: 1px solid var(--accent-gold);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            min-width: 200px;
+            max-width: 300px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+            pointer-events: none;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .calendar-day:hover .calendar-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(-4px);
+        }
+
+        .tooltip-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tooltip-event {
+            font-size: 13px;
+            padding: 4px 0;
+            color: var(--text-primary);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .tooltip-event:last-child {
+            border-bottom: none;
+        }
+
+        .tooltip-event.entrega {
+            color: var(--accent-gold);
+        }
+
+        .tooltip-event.revisao {
+            color: var(--accent-purple);
+        }
+
+        /* Legend */
+        .calendar-legend {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+            padding-top: var(--spacing-md);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        /* Event List */
+        .events-section {
+            margin-top: var(--spacing-lg);
+            background: var(--bg-surface);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            border: 1px solid rgba(236, 180, 61, 0.2);
+        }
+
+        .events-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .event-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--spacing-sm);
+            border-left: 3px solid transparent;
+            transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+        }
+
+        .event-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .event-item.entrega {
+            border-left-color: var(--accent-gold);
+        }
+
+        .event-item.revisao {
+            border-left-color: var(--accent-purple);
+        }
+
+        .event-info {
+            flex: 1;
+        }
+
+        .event-title {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .event-date {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .event-type {
+            padding: 4px 12px;
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .event-type.entrega {
+            background: rgba(236, 180, 61, 0.2);
+            color: var(--accent-gold);
+        }
+
+        .event-type.revisao {
+            background: rgba(85, 39, 173, 0.2);
+            color: var(--accent-purple);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .welcome-text {
+                font-size: 32px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .calendar-grid {
+                gap: 4px;
+            }
+
+            .calendar-day {
+                padding: 4px;
+            }
+
+            .day-number {
+                font-size: 12px;
+            }
+
+            .calendar-legend {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <img src="Logotipo-horizontal-claro (1).png" alt="Freelaw">
+            </div>
+        </header>
+
+        <!-- Login Section -->
+        <section class="login-section" id="loginSection">
+            <div class="login-card">
+                <h1 class="login-title">Painel do Prestador</h1>
+                <p class="login-subtitle">Acesse seu calendário de entregas</p>
+                <form id="loginForm">
+                    <div class="input-group">
+                        <label class="input-label">E-mail</label>
+                        <input
+                            type="email"
+                            class="input-field"
+                            id="emailInput"
+                            placeholder="seu@email.com"
+                            required
+                        >
+                    </div>
+                    <button type="submit" class="btn-primary">Acessar Painel</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Dashboard -->
+        <section class="dashboard" id="dashboard">
+            <div class="dashboard-header">
+                <button class="btn-logout" id="logoutBtn">Sair</button>
+                <h1 class="welcome-text">Bem-vindo(a)!</h1>
+                <p class="user-email" id="userEmail"></p>
+                <p class="warning-text">⚠️ Verifique com atenção todas as datas de entregas, pois os atrasos podem prejudicar sua permanência como prestador na plataforma da Freelaw.</p>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Entregas Pendentes</div>
+                    <div class="stat-value" id="statEntregas">0</div>
+                </div>
+                <div class="stat-card" id="proximoPrazoCard">
+                    <div class="stat-label">Próximo Prazo</div>
+                    <div class="stat-value" id="statProximo">--</div>
+                </div>
+            </div>
+
+            <!-- Calendar -->
+            <div class="calendar-section">
+                <div class="calendar-header">
+                    <h2 class="calendar-title" id="currentMonth"></h2>
+                    <div class="calendar-nav">
+                        <button class="btn-nav" id="prevMonth">← Anterior</button>
+                        <button class="btn-nav" id="nextMonth">Próximo →</button>
+                    </div>
+                </div>
+
+                <div class="calendar-grid">
+                    <div class="calendar-day-header">Dom</div>
+                    <div class="calendar-day-header">Seg</div>
+                    <div class="calendar-day-header">Ter</div>
+                    <div class="calendar-day-header">Qua</div>
+                    <div class="calendar-day-header">Qui</div>
+                    <div class="calendar-day-header">Sex</div>
+                    <div class="calendar-day-header">Sáb</div>
+                </div>
+
+                <div class="calendar-grid" id="calendarDays"></div>
+
+                <div class="calendar-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot indicator-entrega"></div>
+                        <span>Entrega de OS</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot indicator-revisao"></div>
+                        <span>Revisão</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Events List -->
+            <div class="events-section">
+                <h2 class="events-title">Próximas Entregas</h2>
+                <div id="eventsList"></div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        /*
+         * CONFIGURAÇÃO DA API DO METABASE
+         */
+        let sampleEvents = [];
+
+        // Função para buscar dados da Query Pública do Metabase
+        async function fetchPrestadorData(email) {
+            try {
+                // Construir URL da query pública do Metabase
+                const publicCardId = '3ff19457-e51c-4bb9-8cc3-95421ed40559';
+
+                // Usar formato simples de parâmetro conforme a URL pública
+                // A API retorna JSON diretamente quando usamos /query/json
+                const url = `https://metrics.freelaw.work/api/public/card/${publicCardId}/query/json?email=${encodeURIComponent(email)}`;
+
+                console.log('🚀 Iniciando busca de dados...');
+                console.log('📧 E-mail buscado:', email);
+                console.log('🔗 URL da consulta:', url);
+
+                // Fazer requisição para o Metabase (GET para URL pública)
+                // Não usar headers para evitar preflight CORS
+                const response = await fetch(url);
+
+                console.log('📡 Status da resposta:', response.status, response.statusText);
+
+                if (!response.ok) {
+                    console.error(`❌ Erro ${response.status}: A API do Metabase não respondeu.`);
+                    const errorText = await response.text();
+                    console.error('📄 Resposta de erro:', errorText);
+                    return [];
+                }
+
+                const data = await response.json();
+                console.log('✅ Dados recebidos da API:', data.length, 'registros');
+
+                if (data.length > 0) {
+                    console.log('📦 Primeira entrega:', data[0]);
+                    console.log('✅ Todas as entregas:', data);
+                } else {
+                    console.warn('⚠️ Nenhuma entrega encontrada para:', email);
+                }
+
+                // Transformar resposta do Metabase em formato do painel
+                const eventos = data.map(row => {
+                    // Normalizar o tipo de prazo
+                    let type = 'entrega';
+                    const tipoPrazo = row["Tipo Prazo"];
+
+                    // Log especial para OS 144200
+                    if (row["ID da OS"] === 144200) {
+                        console.log('🔍 Processando OS #144200:', {
+                            tipoPrazo: tipoPrazo,
+                            tipoPrazoLower: tipoPrazo ? tipoPrazo.toLowerCase() : null,
+                            contemRevisao: tipoPrazo ? tipoPrazo.toLowerCase().includes('revisão') : false,
+                            contemRevisaoSemAcento: tipoPrazo ? tipoPrazo.toLowerCase().includes('revisao') : false
+                        });
+                    }
+
+                    // Detectar todos os tipos de revisão
+                    if (tipoPrazo) {
+                        const tipoPrazoLower = tipoPrazo.toLowerCase();
+                        if (tipoPrazoLower.includes('revisão') ||
+                            tipoPrazoLower.includes('revisao') ||
+                            tipoPrazoLower.includes('primeira revisão') ||
+                            tipoPrazoLower.includes('primeira revisao')) {
+                            type = 'revisao';
+                        }
+                    }
+
+                    return {
+                        date: new Date(row["Data Prazo"]),
+                        type: type,
+                        title: `OS #${row["ID da OS"]}`,
+                        osName: row["Nome da OS"],
+                        status: row["Status"],
+                        urgencia: row["Urgência"],
+                        tipoPrazo: tipoPrazo
+                    };
+                });
+
+                // Contar tipos e mostrar revisões
+                const totalEntregas = eventos.filter(e => e.type === 'entrega').length;
+                const totalRevisoes = eventos.filter(e => e.type === 'revisao').length;
+                console.log(`📦 Entregas: ${totalEntregas}, 🔄 Revisões: ${totalRevisoes}`);
+
+                // Mostrar todas as revisões encontradas
+                const revisoes = eventos.filter(e => e.type === 'revisao');
+                if (revisoes.length > 0) {
+                    console.log('🔄 Revisões encontradas:', revisoes);
+                }
+
+                // Procurar especificamente a OS 144200
+                const os144200 = eventos.find(e => e.title === 'OS #144200');
+                if (os144200) {
+                    console.log('✅ OS #144200 encontrada:', os144200);
+                } else {
+                    console.warn('❌ OS #144200 NÃO encontrada nos eventos processados');
+                    // Verificar se está nos dados brutos
+                    const rawOs = data.find(row => row["ID da OS"] === 144200);
+                    if (rawOs) {
+                        console.log('📋 OS #144200 nos dados brutos:', rawOs);
+                    }
+                }
+
+                return eventos;
+            } catch (error) {
+                console.warn('Aviso: Não foi possível buscar dados da API:', error);
+                return [];
+            }
+        }
+
+        let currentDate = new Date();
+        let userEmail = '';
+
+        // Login
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const submitBtn = e.target.querySelector('.btn-primary');
+            const originalText = submitBtn.textContent;
+
+            userEmail = document.getElementById('emailInput').value.trim().toLowerCase();
+
+            try {
+                // Mostrar loading
+                submitBtn.textContent = 'Carregando dados do Metabase...';
+                submitBtn.disabled = true;
+
+                // Buscar dados do prestador
+                console.log('📊 Buscando dados para:', userEmail);
+                sampleEvents = await fetchPrestadorData(userEmail);
+                console.log('✅ Dados carregados! Total de entregas:', sampleEvents.length);
+
+                // Mostrar dashboard
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('dashboard').classList.add('active');
+                document.getElementById('userEmail').textContent = userEmail;
+
+                initDashboard();
+
+                // Log das variáveis preenchidas
+                console.log('📋 Variáveis preenchidas com sucesso:');
+                console.log('   - sampleEvents:', sampleEvents.length, 'entregas');
+                console.log('   - userEmail:', userEmail);
+            } catch (error) {
+                console.error('❌ Erro ao carregar dados:', error);
+                alert('Erro ao carregar dados do Metabase. Verifique o console para mais detalhes.');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            document.getElementById('loginSection').style.display = 'flex';
+            document.getElementById('dashboard').classList.remove('active');
+            document.getElementById('emailInput').value = '';
+        });
+
+        function initDashboard() {
+            updateStats();
+            renderCalendar();
+            renderEventsList();
+        }
+
+        function updateStats() {
+            // Data de corte: 18/11/2025 00:00:00
+            const dataCorte = new Date('2025-11-18T00:00:00');
+
+            // Filtrar apenas prazos a partir de 18/11/2025
+            const eventosFiltrados = sampleEvents.filter(e => e.date >= dataCorte);
+            const totalEntregas = eventosFiltrados.length;
+
+            document.getElementById('statEntregas').textContent = totalEntregas;
+
+            const nextEvent = eventosFiltrados
+                .sort((a, b) => a.date - b.date)[0];
+
+            if (nextEvent) {
+                updateCountdown(nextEvent.date);
+
+                // Adicionar tooltip ao card de Próximo Prazo
+                const card = document.getElementById('proximoPrazoCard');
+
+                // Verificar se prazo é <= 24 horas e adicionar classe urgent
+                const now = new Date();
+                const diff = nextEvent.date - now;
+                const hours24 = 24 * 60 * 60 * 1000; // 24 horas em milissegundos
+
+                if (diff <= hours24) {
+                    card.classList.add('urgent');
+                } else {
+                    card.classList.remove('urgent');
+                }
+
+                // Remover tooltip existente se houver
+                const existingTooltip = card.querySelector('.stat-tooltip');
+                if (existingTooltip) {
+                    existingTooltip.remove();
+                }
+
+                // Criar novo tooltip
+                const tooltip = document.createElement('div');
+                tooltip.className = 'stat-tooltip';
+
+                const tooltipTitle = document.createElement('div');
+                tooltipTitle.className = 'stat-tooltip-title';
+                tooltipTitle.textContent = nextEvent.title;
+                tooltip.appendChild(tooltipTitle);
+
+                const tooltipInfo = document.createElement('div');
+                tooltipInfo.className = 'stat-tooltip-info';
+                tooltipInfo.textContent = nextEvent.type === 'entrega' ? 'Entrega' : 'Revisão';
+                tooltip.appendChild(tooltipInfo);
+
+                const tooltipDate = document.createElement('div');
+                tooltipDate.className = 'stat-tooltip-date';
+                tooltipDate.textContent = nextEvent.date.toLocaleString('pt-BR', {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+                tooltip.appendChild(tooltipDate);
+
+                card.appendChild(tooltip);
+            }
+        }
+
+        function updateCountdown(targetDate) {
+            const updateTimer = () => {
+                const now = new Date();
+                const diff = targetDate - now;
+
+                if (diff <= 0) {
+                    document.getElementById('statProximo').textContent = '00:00:00';
+                    return;
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                let display = '';
+                if (days > 0) {
+                    display = `${days}d ${hours.toString().padStart(2, '0')}h`;
+                } else {
+                    display = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+
+                document.getElementById('statProximo').textContent = display;
+            };
+
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+
+        function renderCalendar() {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+
+            // Update month title
+            const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+                               'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+            document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+
+            // Get first day of month and number of days
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+            const calendarDays = document.getElementById('calendarDays');
+            calendarDays.innerHTML = '';
+
+            // Previous month days
+            for (let i = firstDay - 1; i >= 0; i--) {
+                const day = daysInPrevMonth - i;
+                const dayEl = createDayElement(day, true);
+                calendarDays.appendChild(dayEl);
+            }
+
+            // Current month days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayEl = createDayElement(day, false, year, month);
+                calendarDays.appendChild(dayEl);
+            }
+
+            // Next month days
+            const remainingDays = 42 - (firstDay + daysInMonth);
+            for (let day = 1; day <= remainingDays; day++) {
+                const dayEl = createDayElement(day, true);
+                calendarDays.appendChild(dayEl);
+            }
+        }
+
+        function createDayElement(day, otherMonth, year, month) {
+            const dayEl = document.createElement('div');
+            dayEl.className = 'calendar-day';
+
+            if (otherMonth) {
+                dayEl.classList.add('other-month');
+            }
+
+            // Check if today
+            const today = new Date();
+            if (!otherMonth &&
+                day === today.getDate() &&
+                month === today.getMonth() &&
+                year === today.getFullYear()) {
+                dayEl.classList.add('today');
+            }
+
+            // Day number
+            const dayNumber = document.createElement('div');
+            dayNumber.className = 'day-number';
+            dayNumber.textContent = day;
+            dayEl.appendChild(dayNumber);
+
+            // Check for events
+            if (!otherMonth) {
+                const dateToCheck = new Date(year, month, day);
+                const eventsOnDay = sampleEvents.filter(e =>
+                    e.date.getDate() === dateToCheck.getDate() &&
+                    e.date.getMonth() === dateToCheck.getMonth() &&
+                    e.date.getFullYear() === dateToCheck.getFullYear()
+                );
+
+                if (eventsOnDay.length > 0) {
+                    // Adicionar classe para fundo vermelho
+                    dayEl.classList.add('has-events');
+
+                    const hasEntrega = eventsOnDay.some(e => e.type === 'entrega');
+                    const hasRevisao = eventsOnDay.some(e => e.type === 'revisao');
+
+                    const indicator = document.createElement('div');
+                    indicator.className = 'day-indicator';
+
+                    if (hasEntrega && hasRevisao) {
+                        indicator.classList.add('indicator-both');
+                    } else if (hasEntrega) {
+                        indicator.classList.add('indicator-entrega');
+                    } else {
+                        indicator.classList.add('indicator-revisao');
+                    }
+
+                    dayEl.appendChild(indicator);
+
+                    // Criar tooltip
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'calendar-tooltip';
+
+                    const tooltipTitle = document.createElement('div');
+                    tooltipTitle.className = 'tooltip-title';
+                    tooltipTitle.textContent = `${eventsOnDay.length} entrega${eventsOnDay.length > 1 ? 's' : ''}`;
+                    tooltip.appendChild(tooltipTitle);
+
+                    eventsOnDay.forEach(event => {
+                        const eventDiv = document.createElement('div');
+                        eventDiv.className = `tooltip-event ${event.type}`;
+                        eventDiv.textContent = event.title;
+                        tooltip.appendChild(eventDiv);
+                    });
+
+                    dayEl.appendChild(tooltip);
+                }
+            }
+
+            return dayEl;
+        }
+
+        function renderEventsList() {
+            const eventsList = document.getElementById('eventsList');
+            eventsList.innerHTML = '';
+
+            console.log('📋 Total de eventos em sampleEvents:', sampleEvents.length);
+
+            // Data de corte: 18/11/2025 00:00:00
+            const dataCorte = new Date('2025-11-18T00:00:00');
+            const upcomingEvents = sampleEvents
+                .filter(e => {
+                    const isFuturo = e.date >= dataCorte;
+                    if (!isFuturo) {
+                        console.log('⏭️ Evento filtrado (anterior a 18/11/2025):', e.title, e.date);
+                    }
+                    return isFuturo;
+                })
+                .sort((a, b) => a.date - b.date);
+
+            // Mostrar TODAS as entregas (sem limite)
+            // .slice(0, 20) foi removido para exibir todas
+
+            console.log('📋 Total de eventos na lista:', upcomingEvents.length);
+            console.log('🔄 Revisões na lista:', upcomingEvents.filter(e => e.type === 'revisao').length);
+
+            // Verificar se OS #144200 está na lista
+            const os144200NaLista = upcomingEvents.find(e => e.title === 'OS #144200');
+            if (os144200NaLista) {
+                console.log('✅ OS #144200 ESTÁ na lista final!', os144200NaLista);
+            } else {
+                console.warn('❌ OS #144200 NÃO está na lista final');
+            }
+
+            upcomingEvents.forEach(event => {
+                const eventItem = document.createElement('div');
+                eventItem.className = `event-item ${event.type}`;
+
+                eventItem.innerHTML = `
+                    <div class="event-info">
+                        <div class="event-title">${event.title} - ${event.osName || 'Sem nome'}</div>
+                        <div class="event-date">${event.date.toLocaleDateString('pt-BR', {
+                            day: '2-digit',
+                            month: 'long',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        })}</div>
+                    </div>
+                    <div class="event-type ${event.type}">
+                        ${event.type === 'entrega' ? 'Entrega' : 'Revisão'}
+                    </div>
+                `;
+
+                eventsList.appendChild(eventItem);
+            });
+        }
+
+        // Navigation
+        document.getElementById('prevMonth').addEventListener('click', function() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar();
+        });
+
+        document.getElementById('nextMonth').addEventListener('click', function() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar();
+        });
+    </script>
+</body>
+</html>
