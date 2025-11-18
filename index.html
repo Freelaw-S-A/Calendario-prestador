@@ -727,9 +727,15 @@
                 // Construir URL da query pública do Metabase
                 const publicCardId = '3ff19457-e51c-4bb9-8cc3-95421ed40559';
 
-                // Usar formato simples de parâmetro conforme a URL pública
-                // A API retorna JSON diretamente quando usamos /query/json
-                const metabaseUrl = `https://metrics.freelaw.work/api/public/card/${publicCardId}/query/json?email=${encodeURIComponent(email)}`;
+                // Formato correto de parâmetros para Metabase (array JSON)
+                const parameters = JSON.stringify([{
+                    "type": "category",
+                    "target": ["variable", ["template-tag", "email"]],
+                    "value": email
+                }]);
+
+                // URL completa com parâmetros
+                const metabaseUrl = `https://metrics.freelaw.work/api/public/card/${publicCardId}/query/json?parameters=${encodeURIComponent(parameters)}`;
 
                 // Usar proxy CORS para evitar bloqueio
                 const corsProxy = 'https://corsproxy.io/?';
