@@ -489,32 +489,6 @@
             gap: 16px;
         }
 
-        .sidebar-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .sidebar-nav-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .sidebar-filters {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .sidebar-filters .filter-btn {
-            width: 100%;
-            padding: 14px 20px;
-            text-align: left;
-            border-radius: var(--radius-sm);
-        }
 
         /* Dashboard Main Content */
         .dashboard-main {
@@ -673,11 +647,14 @@
         }
 
         .calendar-day.has-events {
-            background: linear-gradient(to bottom, #9B7AC7, #D4AA78);
+            border: 3px solid transparent;
+            border-image: linear-gradient(to bottom, #9B7AC7, #D4AA78) 1;
         }
 
         .calendar-day.has-events:hover {
-            background: linear-gradient(to bottom, #A88AD7, #DEB888);
+            border: 3px solid transparent;
+            border-image: linear-gradient(to bottom, #A88AD7, #DEB888) 1;
+            background: var(--bg-elevated);
         }
 
         .day-number {
@@ -812,13 +789,25 @@
             background: rgba(236, 180, 61, 0.5);
         }
 
+        .events-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
         .events-title {
             font-size: 20px;
             font-weight: 700;
             color: var(--text-primary);
-            margin: 0 0 var(--spacing-md) 0;
-            padding-bottom: var(--spacing-sm);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin: 0;
+        }
+
+        .events-filters {
+            display: flex;
+            gap: 8px;
         }
 
         .filter-btn {
@@ -1079,15 +1068,6 @@
                         </div>
                     </div>
 
-                    <!-- Navegação/Filtros -->
-                    <div class="sidebar-nav">
-                        <h3 class="sidebar-nav-title">Filtrar entregas</h3>
-                        <div class="sidebar-filters">
-                            <button class="filter-btn active" data-filter="all">Todas as entregas</button>
-                            <button class="filter-btn" data-filter="entrega">Entregas 1ª versão</button>
-                            <button class="filter-btn" data-filter="revisao">Revisões</button>
-                        </div>
-                    </div>
                 </aside>
 
                 <!-- Área Principal -->
@@ -1128,7 +1108,14 @@
 
                     <!-- Events List -->
                     <div class="events-section">
-                        <h2 class="events-title">Lista de Entregas</h2>
+                        <div class="events-header">
+                            <h2 class="events-title">Lista de Entregas</h2>
+                            <div class="events-filters">
+                                <button class="filter-btn active" data-filter="all">Todas as entregas</button>
+                                <button class="filter-btn" data-filter="entrega">Entregas 1ª versão</button>
+                                <button class="filter-btn" data-filter="revisao">Revisões</button>
+                            </div>
+                        </div>
                         <div id="eventsList"></div>
                     </div>
                 </main>
