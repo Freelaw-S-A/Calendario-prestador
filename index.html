@@ -254,7 +254,7 @@
             right: 0;
             background: var(--bg-primary);
             z-index: 99;
-            padding: var(--spacing-md) 32px;
+            padding: var(--spacing-md) 56px;
             border-bottom: 1px solid var(--border-subtle);
         }
 
@@ -470,6 +470,8 @@
         .dashboard-content {
             display: block;
             padding-top: 200px;
+            padding-left: 56px;
+            padding-right: 56px;
         }
 
         /* Bloco de Métricas Horizontal */
@@ -630,11 +632,11 @@
         }
 
         .calendar-day.has-events {
-            background: linear-gradient(to bottom, #7F3EAF, #B27C44);
+            background: linear-gradient(to bottom, #9B7AC7, #D4AA78);
         }
 
         .calendar-day.has-events:hover {
-            background: linear-gradient(to bottom, #8F4EBF, #C28C54);
+            background: linear-gradient(to bottom, #A88AD7, #DEB888);
         }
 
         .day-number {
@@ -943,6 +945,16 @@
             .btn-logout {
                 position: static;
                 margin-bottom: var(--spacing-md);
+            }
+
+            .dashboard-content {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .dashboard-header {
+                padding-left: 20px;
+                padding-right: 20px;
             }
         }
     </style>
