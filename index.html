@@ -90,6 +90,12 @@
             opacity: 0.9;
         }
 
+        /* Ocultar "Gestão de Entregas" no header quando login estiver visível */
+        .login-section:not([style*="display: none"]) ~ .dashboard .logo-subtitle,
+        body:has(.login-section:not([style*="display: none"])) .logo-subtitle {
+            display: none;
+        }
+
         /* Login Section */
         .login-section {
             display: flex;
@@ -116,6 +122,7 @@
             margin-bottom: 16px;
             color: #FFFFFF;
             line-height: 1.1;
+            white-space: nowrap;
         }
 
         .login-subtitle {
@@ -1082,13 +1089,13 @@
                 <aside class="sidebar" role="navigation" aria-label="Filtros de entregas">
                     <!-- Stats na Sidebar -->
                     <div class="sidebar-stats">
-                        <div class="stat-card">
-                            <div class="stat-label">Entregas Pendentes</div>
-                            <div class="stat-value" id="statEntregas">0</div>
-                        </div>
                         <div class="stat-card" id="proximoPrazoCard">
                             <div class="stat-label">Próximo Prazo</div>
                             <div class="stat-value" id="statProximo">--</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Entregas Pendentes</div>
+                            <div class="stat-value" id="statEntregas">0</div>
                         </div>
                     </div>
 
