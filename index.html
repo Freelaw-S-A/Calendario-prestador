@@ -1377,11 +1377,6 @@
                 tooltipTitle.textContent = nextEvent.title;
                 tooltip.appendChild(tooltipTitle);
 
-                const tooltipInfo = document.createElement('div');
-                tooltipInfo.className = 'stat-tooltip-info';
-                tooltipInfo.textContent = nextEvent.type === 'entrega' ? 'Entrega' : 'Revisão';
-                tooltip.appendChild(tooltipInfo);
-
                 const tooltipDate = document.createElement('div');
                 tooltipDate.className = 'stat-tooltip-date';
                 tooltipDate.textContent = nextEvent.date.toLocaleString('pt-BR', {
