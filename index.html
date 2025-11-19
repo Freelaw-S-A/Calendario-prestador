@@ -83,10 +83,10 @@
         }
 
         .login-title {
-            font-size: 32px;
+            font-size: 48px;
             font-weight: 800;
             letter-spacing: -0.022em;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             background: linear-gradient(180deg, var(--text-primary), var(--text-secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -96,7 +96,7 @@
         .login-subtitle {
             color: var(--text-secondary);
             margin-bottom: 32px;
-            font-size: 16px;
+            font-size: 20px;
             line-height: 1.5;
         }
 
@@ -107,7 +107,7 @@
 
         .input-label {
             display: block;
-            font-size: 14px;
+            font-size: 18px;
             font-weight: 600;
             margin-bottom: var(--spacing-xs);
             color: var(--text-secondary);
@@ -254,11 +254,32 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+            text-decoration: none;
         }
 
         .btn-support-header:hover {
             background: #20BA5A;
             box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-entrega {
+            display: inline-block;
+            padding: 12px 32px;
+            background: var(--accent-gold);
+            color: #000;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+            text-decoration: none;
+            margin-top: 16px;
+        }
+
+        .btn-entrega:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(236, 180, 61, 0.4);
         }
 
         /* Stats Grid */
@@ -715,6 +736,7 @@
                 <h1 class="welcome-text">Bem-vindo(a)!</h1>
                 <p class="user-email" id="userEmail"></p>
                 <p class="warning-text">⚠️ Verifique com atenção todas as datas de entregas, pois os atrasos podem prejudicar sua permanência como prestador na plataforma da Freelaw.</p>
+                <a href="https://app.freelaw.work/login" target="_blank" class="btn-entrega">Faça sua entrega</a>
             </div>
 
             <!-- Stats -->
