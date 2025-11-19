@@ -209,28 +209,28 @@
         }
 
         .dashboard-header {
-            margin-bottom: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
             text-align: left;
             position: relative;
         }
 
         .welcome-text {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
             letter-spacing: -0.022em;
-            margin-bottom: var(--spacing-sm);
+            margin-bottom: 12px;
             color: #FFFFFF;
         }
 
         .warning-text {
             color: #fbbf24;
-            font-size: 13px;
-            line-height: 1.6;
+            font-size: 12px;
+            line-height: 1.5;
             margin: 0;
-            padding: 12px 16px;
+            padding: 10px 14px;
             background: rgba(251, 191, 36, 0.06);
             border-left: 3px solid #fbbf24;
-            border-radius: 8px;
+            border-radius: 6px;
             text-align: left;
             display: inline-block;
             max-width: 100%;
@@ -423,8 +423,8 @@
         /* Dashboard Layout */
         .dashboard-content {
             display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: var(--spacing-lg);
+            grid-template-columns: 220px 1fr;
+            gap: var(--spacing-md);
         }
 
         /* Sidebar */
@@ -506,8 +506,8 @@
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: var(--spacing-md);
-            margin-bottom: var(--spacing-xl);
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
         }
 
         @media (max-width: 768px) {
@@ -518,8 +518,8 @@
 
         .stat-card {
             background: linear-gradient(135deg, rgba(29, 29, 31, 0.8) 0%, rgba(29, 29, 31, 0.95) 100%);
-            border-radius: var(--radius-md);
-            padding: 28px 24px;
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
             border: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
             position: relative;
@@ -528,21 +528,21 @@
 
         .stat-card:hover {
             border-color: var(--accent-gold);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
         }
 
         .stat-label {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-secondary);
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             font-weight: 600;
         }
 
         .stat-value {
-            font-size: 42px;
+            font-size: 32px;
             font-weight: 800;
             color: var(--accent-gold);
             letter-spacing: -0.02em;
@@ -618,24 +618,25 @@
 
         /* Calendar */
         .calendar-section {
-            background: linear-gradient(135deg, rgba(29, 29, 31, 0.6) 0%, rgba(29, 29, 31, 0.9) 100%);
+            background: linear-gradient(135deg, rgba(29, 29, 31, 0.7) 0%, rgba(29, 29, 31, 0.95) 100%);
             border-radius: var(--radius-md);
-            padding: var(--spacing-lg);
-            border: 1px solid rgba(85, 39, 173, 0.15);
+            padding: var(--spacing-xl);
+            border: 2px solid rgba(85, 39, 173, 0.3);
             backdrop-filter: blur(10px);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
         }
 
         .calendar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: var(--spacing-lg);
-            padding-bottom: var(--spacing-md);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.08);
         }
 
         .calendar-title {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
             letter-spacing: -0.022em;
             color: var(--text-primary);
@@ -678,17 +679,17 @@
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: var(--spacing-xs);
+            gap: 12px;
         }
 
         .calendar-day-header {
             text-align: center;
-            padding: var(--spacing-sm);
-            font-size: 12px;
+            padding: var(--spacing-md);
+            font-size: 13px;
             font-weight: 700;
-            color: var(--text-secondary);
+            color: var(--text-primary);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
         }
 
         .calendar-day {
@@ -697,43 +698,46 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: var(--spacing-xs);
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 255, 255, 0.08);
             border-radius: var(--radius-sm);
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+            transition: all 0.2s cubic-bezier(0.28, 0.11, 0.32, 1);
             position: relative;
+            min-height: 70px;
         }
 
         .calendar-day:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
         }
 
         .calendar-day.other-month {
-            opacity: 0.3;
+            opacity: 0.25;
         }
 
         .calendar-day.today {
             border-color: var(--accent-gold);
-            background: rgba(236, 180, 61, 0.1);
+            background: rgba(236, 180, 61, 0.15);
+            box-shadow: 0 0 20px rgba(236, 180, 61, 0.3);
         }
 
         .calendar-day.has-events {
-            background: rgba(220, 38, 38, 0.3);
-            border-color: rgba(220, 38, 38, 0.5);
+            background: rgba(220, 38, 38, 0.35);
+            border-color: rgba(220, 38, 38, 0.6);
         }
 
         .calendar-day.has-events:hover {
-            background: rgba(220, 38, 38, 0.4);
-            border-color: rgba(220, 38, 38, 0.7);
+            background: rgba(220, 38, 38, 0.45);
+            border-color: rgba(220, 38, 38, 0.8);
         }
 
         .day-number {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 4px;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
         }
 
         .day-indicator {
@@ -834,19 +838,39 @@
 
         /* Event List */
         .events-section {
-            margin-top: var(--spacing-xl);
-            background: linear-gradient(135deg, rgba(29, 29, 31, 0.6) 0%, rgba(29, 29, 31, 0.9) 100%);
-            border-radius: var(--radius-md);
-            padding: var(--spacing-lg);
-            border: 1px solid rgba(236, 180, 61, 0.15);
+            margin-top: var(--spacing-lg);
+            background: linear-gradient(135deg, rgba(29, 29, 31, 0.5) 0%, rgba(29, 29, 31, 0.8) 100%);
+            border-radius: var(--radius-sm);
+            padding: var(--spacing-md);
+            border: 1px solid rgba(236, 180, 61, 0.1);
             backdrop-filter: blur(10px);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .events-section::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .events-section::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        .events-section::-webkit-scrollbar-thumb {
+            background: rgba(236, 180, 61, 0.3);
+            border-radius: 4px;
+        }
+
+        .events-section::-webkit-scrollbar-thumb:hover {
+            background: rgba(236, 180, 61, 0.5);
         }
 
         .events-title {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
-            margin-bottom: var(--spacing-lg);
-            padding-bottom: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             color: var(--text-primary);
         }
