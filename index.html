@@ -256,8 +256,10 @@
             padding: var(--spacing-md) 56px;
             border-bottom: 1px solid var(--border-subtle);
             display: flex;
-            flex-direction: column;
-            gap: 8px;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
         }
 
         .welcome-text {
@@ -267,6 +269,7 @@
             margin: 0;
             color: #9CA3AF;
             text-align: right;
+            white-space: nowrap;
         }
 
         /* Barra de Notificação Fina no Topo */
@@ -279,14 +282,11 @@
             background: transparent;
             text-align: left;
             display: block;
-            width: 100%;
+            flex: 1;
             font-weight: 400;
         }
 
         .btn-logout {
-            position: absolute;
-            top: 0;
-            right: 0;
             padding: 10px 24px;
             background: transparent;
             color: var(--text-secondary);
@@ -503,7 +503,7 @@
             padding: 24px 0;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
             gap: 8px;
         }
@@ -514,7 +514,7 @@
             color: #6B7280;
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            text-align: center;
+            text-align: left;
         }
 
         .metric-value {
@@ -522,7 +522,7 @@
             font-weight: 700;
             color: var(--text-primary);
             line-height: 1;
-            text-align: center;
+            text-align: left;
         }
 
         .metric-card.urgent .metric-value {
