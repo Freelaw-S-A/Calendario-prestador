@@ -132,7 +132,7 @@
             width: 100%;
             padding: 16px 20px;
             background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.15);
             border-radius: var(--radius-sm);
             color: var(--text-primary);
             font-size: 16px;
@@ -140,15 +140,24 @@
             transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
         }
 
+        .input-field:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
         .input-field:focus {
             outline: none;
             border-color: var(--accent-gold);
             background: rgba(255, 255, 255, 0.12);
-            box-shadow: 0 0 0 4px rgba(236, 180, 61, 0.15);
+            box-shadow: 0 0 0 4px rgba(236, 180, 61, 0.2);
         }
 
         .input-field::placeholder {
-            color: var(--text-secondary);
+            color: rgba(161, 161, 166, 0.8);
+        }
+
+        .input-field:invalid:not(:placeholder-shown) {
+            border-color: #ff4444;
         }
 
         .btn-primary {
@@ -163,15 +172,31 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
             margin-top: 12px;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(236, 180, 61, 0.4);
+            box-shadow: 0 12px 32px rgba(236, 180, 61, 0.5);
+            background: #f5c550;
         }
 
         .btn-primary:active {
             transform: translateY(0);
+            background: #d9a730;
+        }
+
+        .btn-primary:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(236, 180, 61, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         /* Dashboard */
@@ -218,18 +243,28 @@
             padding: 10px 24px;
             background: transparent;
             color: var(--text-secondary);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: var(--radius-pill);
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+            transition: all 0.2s cubic-bezier(0.28, 0.11, 0.32, 1);
         }
 
         .btn-logout:hover {
             border-color: var(--accent-gold);
             color: var(--accent-gold);
-            background: rgba(236, 180, 61, 0.05);
+            background: rgba(236, 180, 61, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .btn-logout:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(236, 180, 61, 0.2);
+        }
+
+        .btn-logout:active {
+            transform: translateY(0);
         }
 
         .btn-support {
@@ -243,7 +278,7 @@
             border-radius: 50%;
             cursor: pointer;
             box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+            transition: all 0.2s cubic-bezier(0.28, 0.11, 0.32, 1);
             z-index: 1000;
             display: flex;
             align-items: center;
@@ -252,7 +287,17 @@
 
         .btn-support:hover {
             transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+            box-shadow: 0 8px 32px rgba(37, 211, 102, 0.6);
+            background: #20ba5a;
+        }
+
+        .btn-support:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-support:active {
+            transform: scale(1.05);
         }
 
         .btn-support svg {
@@ -292,13 +337,24 @@
             font-size: 14px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+            transition: all 0.2s cubic-bezier(0.28, 0.11, 0.32, 1);
             text-decoration: none;
         }
 
         .btn-entrega:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 24px rgba(236, 180, 61, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(236, 180, 61, 0.5);
+            background: #f5c550;
+        }
+
+        .btn-entrega:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(236, 180, 61, 0.3);
+        }
+
+        .btn-entrega:active {
+            transform: translateY(0);
+            background: #d9a730;
         }
 
         .btn-entrega-header {
@@ -307,6 +363,61 @@
 
         .dashboard .btn-entrega-header {
             display: inline-block;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-md);
+            color: var(--text-secondary);
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: var(--spacing-md);
+            opacity: 0.5;
+        }
+
+        .empty-state-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .empty-state-text {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Skip to main content */
+        .skip-to-main {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent-gold);
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+            font-weight: 600;
+            z-index: 10000;
+        }
+
+        .skip-to-main:focus {
+            top: 0;
         }
 
         /* Dashboard Layout */
@@ -340,8 +451,8 @@
             text-decoration: none;
             font-size: 14px;
             font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
-            border: none;
+            transition: all 0.2s cubic-bezier(0.28, 0.11, 0.32, 1);
+            border: 2px solid transparent;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -349,18 +460,32 @@
         }
 
         .sidebar-link:hover {
+            background: rgba(85, 39, 173, 0.08);
+            transform: translateX(2px);
+        }
+
+        .sidebar-link:focus {
+            outline: none;
+            border-color: var(--accent-purple);
             background: rgba(85, 39, 173, 0.05);
         }
 
         .sidebar-link.active {
             background: var(--accent-purple);
             color: #FFFFFF;
+            border-color: var(--accent-purple);
+        }
+
+        .sidebar-link.active:hover {
+            background: #6b3cc0;
+            border-color: #6b3cc0;
         }
 
         .sidebar-link svg {
             width: 18px;
             height: 18px;
             fill: currentColor;
+            flex-shrink: 0;
         }
 
         .main-content {
@@ -522,20 +647,32 @@
         }
 
         .btn-nav {
-            padding: 8px 16px;
+            padding: 10px 18px;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: var(--radius-sm);
             color: var(--text-primary);
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+            transition: all 0.2s cubic-bezier(0.28, 0.11, 0.32, 1);
             font-family: 'Inter', sans-serif;
             font-weight: 600;
+            font-size: 14px;
         }
 
         .btn-nav:hover {
             border-color: var(--accent-purple);
-            background: rgba(85, 39, 173, 0.1);
+            background: rgba(85, 39, 173, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .btn-nav:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(85, 39, 173, 0.2);
+        }
+
+        .btn-nav:active {
+            transform: translateY(0);
+            background: rgba(85, 39, 173, 0.2);
         }
 
         .calendar-grid {
@@ -854,28 +991,40 @@
         </header>
 
         <!-- Login Section -->
-        <section class="login-section" id="loginSection">
+        <section class="login-section" id="loginSection" role="main" aria-label="Área de login">
             <div class="login-card">
                 <h1 class="login-title">Painel do Prestador</h1>
                 <p class="login-subtitle">Acesse seu calendário de entregas</p>
-                <form id="loginForm">
+                <form id="loginForm" aria-label="Formulário de acesso">
                     <div class="input-group">
-                        <label class="input-label">E-mail</label>
+                        <label class="input-label" for="emailInput">E-mail</label>
                         <input
                             type="email"
                             class="input-field"
                             id="emailInput"
+                            name="email"
                             placeholder="seu@email.com"
+                            aria-required="true"
+                            aria-describedby="emailHelp"
+                            autocomplete="email"
                             required
                         >
+                        <span id="emailHelp" class="sr-only">Digite seu e-mail cadastrado como prestador</span>
                     </div>
-                    <button type="submit" class="btn-primary">Acessar Painel</button>
+                    <button type="submit" class="btn-primary" aria-label="Acessar painel do prestador">Acessar Painel</button>
                 </form>
             </div>
 
             <!-- Botão de Suporte WhatsApp Flutuante -->
-            <a href="https://api.whatsapp.com/send/?phone=553130668360&text&app_absent=0" target="_blank" class="btn-support" title="Suporte via WhatsApp">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <a
+                href="https://api.whatsapp.com/send/?phone=553130668360&text&app_absent=0"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-support"
+                aria-label="Contatar suporte via WhatsApp"
+                title="Suporte via WhatsApp"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
                 </svg>
             </a>
@@ -891,18 +1040,39 @@
 
             <div class="dashboard-content">
                 <!-- Sidebar -->
-                <aside class="sidebar">
+                <aside class="sidebar" role="navigation" aria-label="Filtros de entregas">
                     <nav class="sidebar-nav">
-                        <a class="sidebar-link active" data-filter="all">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+                        <a
+                            class="sidebar-link active"
+                            data-filter="all"
+                            role="button"
+                            tabindex="0"
+                            aria-label="Filtrar todas as entregas"
+                            aria-pressed="true"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
                             Todas as entregas
                         </a>
-                        <a class="sidebar-link" data-filter="entrega">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                        <a
+                            class="sidebar-link"
+                            data-filter="entrega"
+                            role="button"
+                            tabindex="0"
+                            aria-label="Filtrar entregas de primeira versão"
+                            aria-pressed="false"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
                             Entregas 1ª versão
                         </a>
-                        <a class="sidebar-link" data-filter="revisao">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+                        <a
+                            class="sidebar-link"
+                            data-filter="revisao"
+                            role="button"
+                            tabindex="0"
+                            aria-label="Filtrar revisões"
+                            aria-pressed="false"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
                             Revisões
                         </a>
                     </nav>
@@ -1430,20 +1600,36 @@
 
         // Filtro da sidebar
         document.querySelectorAll('.sidebar-link').forEach(link => {
-            link.addEventListener('click', function(e) {
+            // Função de ativação de filtro
+            const activateFilter = function(e) {
                 e.preventDefault();
 
-                // Remover classe active de todos os links
-                document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+                // Remover classe active e atualizar aria-pressed de todos os links
+                document.querySelectorAll('.sidebar-link').forEach(l => {
+                    l.classList.remove('active');
+                    l.setAttribute('aria-pressed', 'false');
+                });
 
-                // Adicionar classe active no link clicado
+                // Adicionar classe active e atualizar aria-pressed no link clicado
                 this.classList.add('active');
+                this.setAttribute('aria-pressed', 'true');
 
                 // Atualizar filtro atual
                 currentFilter = this.getAttribute('data-filter');
 
                 // Re-renderizar lista de eventos
                 renderEventsList();
+            };
+
+            // Evento de click
+            link.addEventListener('click', activateFilter);
+
+            // Suporte para navegação por teclado (Enter e Space)
+            link.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    activateFilter.call(this, e);
+                }
             });
         });
     </script>
