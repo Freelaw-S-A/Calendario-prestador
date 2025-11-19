@@ -75,11 +75,16 @@
             filter: brightness(1.2);
         }
 
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
         .logo-subtitle {
-            margin-left: 16px;
             font-size: 14px;
             font-weight: 600;
-            color: var(--accent-gold);
+            color: #FFFFFF;
             letter-spacing: 0.5px;
             text-transform: uppercase;
             opacity: 0.9;
@@ -1016,9 +1021,11 @@
             <div class="header-content">
                 <div class="logo">
                     <img src="logo.png" alt="Freelaw">
-                    <span class="logo-subtitle">Gestão de Entregas</span>
                 </div>
-                <a href="https://app.freelaw.work/login" target="_blank" class="btn-entrega btn-entrega-header">Faça sua entrega</a>
+                <div class="header-right">
+                    <span class="logo-subtitle">Gestão de Entregas</span>
+                    <a href="https://app.freelaw.work/login" target="_blank" class="btn-entrega btn-entrega-header">Faça sua entrega</a>
+                </div>
             </div>
         </header>
 
@@ -1073,6 +1080,18 @@
             <div class="dashboard-content">
                 <!-- Sidebar -->
                 <aside class="sidebar" role="navigation" aria-label="Filtros de entregas">
+                    <!-- Stats na Sidebar -->
+                    <div class="sidebar-stats">
+                        <div class="stat-card">
+                            <div class="stat-label">Entregas Pendentes</div>
+                            <div class="stat-value" id="statEntregas">0</div>
+                        </div>
+                        <div class="stat-card" id="proximoPrazoCard">
+                            <div class="stat-label">Próximo Prazo</div>
+                            <div class="stat-value" id="statProximo">--</div>
+                        </div>
+                    </div>
+
                     <nav class="sidebar-nav">
                         <a
                             class="sidebar-link active"
@@ -1108,18 +1127,6 @@
                             Revisões
                         </a>
                     </nav>
-
-                    <!-- Stats na Sidebar -->
-                    <div class="sidebar-stats">
-                        <div class="stat-card">
-                            <div class="stat-label">Entregas Pendentes</div>
-                            <div class="stat-value" id="statEntregas">0</div>
-                        </div>
-                        <div class="stat-card" id="proximoPrazoCard">
-                            <div class="stat-label">Próximo Prazo</div>
-                            <div class="stat-value" id="statProximo">--</div>
-                        </div>
-                    </div>
                 </aside>
 
                 <!-- Main Content -->
