@@ -482,7 +482,10 @@
             flex-direction: column;
             gap: 24px;
             padding-left: 0;
-            margin-left: -150px;
+            position: fixed;
+            top: 220px;
+            left: 20px;
+            z-index: 50;
         }
 
         .sidebar-metrics {
@@ -999,6 +1002,7 @@
             .dashboard-sidebar {
                 gap: 24px;
                 margin-left: 0;
+                position: static;
             }
         }
     </style>
