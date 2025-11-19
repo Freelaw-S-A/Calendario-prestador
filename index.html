@@ -468,18 +468,59 @@
 
         /* Dashboard Layout */
         .dashboard-content {
-            display: block;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 40px;
             padding-top: 200px;
             padding-left: 56px;
             padding-right: 56px;
         }
 
-        /* Bloco de Métricas Horizontal */
-        .metrics-bar {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-md);
+        /* Dashboard Sidebar */
+        .dashboard-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .sidebar-metrics {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .sidebar-nav-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-filters {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-filters .filter-btn {
+            width: 100%;
+            padding: 14px 20px;
+            text-align: left;
+            border-radius: var(--radius-sm);
+        }
+
+        /* Dashboard Main Content */
+        .dashboard-main {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
         }
 
         .metric-card {
@@ -771,25 +812,13 @@
             background: rgba(236, 180, 61, 0.5);
         }
 
-        .events-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--spacing-md);
-            padding-bottom: var(--spacing-sm);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
         .events-title {
             font-size: 20px;
             font-weight: 700;
             color: var(--text-primary);
-            margin: 0;
-        }
-
-        .events-filters {
-            display: flex;
-            gap: 8px;
+            margin: 0 0 var(--spacing-md) 0;
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .filter-btn {
@@ -960,6 +989,15 @@
             .header {
                 padding: 16px 20px;
             }
+
+            .dashboard-content {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .dashboard-sidebar {
+                gap: 24px;
+            }
         }
     </style>
 </head>
@@ -1021,13 +1059,16 @@
         <!-- Dashboard -->
         <section class="dashboard" id="dashboard">
             <div class="dashboard-header">
-                <h1 class="welcome-text" id="welcomeText">Bem-vindo(a)!</h1>
                 <p class="warning-text">⚠️ Verifique com atenção todas as datas de entregas, pois os atrasos podem prejudicar sua permanência como prestador(a) na plataforma da Freelaw.</p>
             </div>
 
             <div class="dashboard-content">
-                    <!-- Métricas em Bloco Horizontal -->
-                    <div class="metrics-bar">
+                <!-- Sidebar Lateral -->
+                <aside class="dashboard-sidebar">
+                    <h1 class="welcome-text" id="welcomeText">Bem-vindo(a)!</h1>
+
+                    <!-- Métricas Críticas -->
+                    <div class="sidebar-metrics">
                         <div class="metric-card urgent" id="proximoPrazoCard">
                             <div class="metric-label">Próximo Prazo</div>
                             <div class="metric-value" id="statProximo">--</div>
@@ -1038,54 +1079,61 @@
                         </div>
                     </div>
 
-            <!-- Calendar -->
-            <div class="calendar-section">
-                <div class="calendar-header">
-                    <h2 class="calendar-title" id="currentMonth"></h2>
-                    <div class="calendar-nav">
-                        <button class="btn-nav" id="prevMonth">← Anterior</button>
-                        <button class="btn-nav" id="nextMonth">Próximo →</button>
+                    <!-- Navegação/Filtros -->
+                    <div class="sidebar-nav">
+                        <h3 class="sidebar-nav-title">Filtrar entregas</h3>
+                        <div class="sidebar-filters">
+                            <button class="filter-btn active" data-filter="all">Todas as entregas</button>
+                            <button class="filter-btn" data-filter="entrega">Entregas 1ª versão</button>
+                            <button class="filter-btn" data-filter="revisao">Revisões</button>
+                        </div>
                     </div>
-                </div>
+                </aside>
 
-                <div class="calendar-grid">
-                    <div class="calendar-day-header">Dom</div>
-                    <div class="calendar-day-header">Seg</div>
-                    <div class="calendar-day-header">Ter</div>
-                    <div class="calendar-day-header">Qua</div>
-                    <div class="calendar-day-header">Qui</div>
-                    <div class="calendar-day-header">Sex</div>
-                    <div class="calendar-day-header">Sáb</div>
-                </div>
+                <!-- Área Principal -->
+                <main class="dashboard-main">
+                    <!-- Calendar -->
+                    <div class="calendar-section">
+                        <div class="calendar-header">
+                            <h2 class="calendar-title" id="currentMonth"></h2>
+                            <div class="calendar-nav">
+                                <button class="btn-nav" id="prevMonth">← Anterior</button>
+                                <button class="btn-nav" id="nextMonth">Próximo →</button>
+                            </div>
+                        </div>
 
-                <div class="calendar-grid" id="calendarDays"></div>
+                        <div class="calendar-grid">
+                            <div class="calendar-day-header">Dom</div>
+                            <div class="calendar-day-header">Seg</div>
+                            <div class="calendar-day-header">Ter</div>
+                            <div class="calendar-day-header">Qua</div>
+                            <div class="calendar-day-header">Qui</div>
+                            <div class="calendar-day-header">Sex</div>
+                            <div class="calendar-day-header">Sáb</div>
+                        </div>
 
-                <div class="calendar-legend">
-                    <div class="legend-item">
-                        <div class="legend-dot indicator-entrega"></div>
-                        <span>Entrega de OS</span>
+                        <div class="calendar-grid" id="calendarDays"></div>
+
+                        <div class="calendar-legend">
+                            <div class="legend-item">
+                                <div class="legend-dot indicator-entrega"></div>
+                                <span>Entrega de OS</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot indicator-revisao"></div>
+                                <span>Revisão</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="legend-item">
-                        <div class="legend-dot indicator-revisao"></div>
-                        <span>Revisão</span>
-                    </div>
-                </div>
-            </div>
 
                     <!-- Events List -->
                     <div class="events-section">
-                        <div class="events-header">
-                            <h2 class="events-title">Entregas Pendentes</h2>
-                            <div class="events-filters">
-                                <button class="filter-btn active" data-filter="all">Todas as entregas</button>
-                                <button class="filter-btn" data-filter="entrega">Entregas 1ª versão</button>
-                                <button class="filter-btn" data-filter="revisao">Revisões</button>
-                            </div>
-                        </div>
+                        <h2 class="events-title">Lista de Entregas</h2>
                         <div id="eventsList"></div>
                     </div>
-                </div>
+                </main>
             </div>
+        </section>
 
             <!-- Botão de Suporte WhatsApp Flutuante -->
             <a href="https://api.whatsapp.com/send/?phone=553130668360&text&app_absent=0" target="_blank" class="btn-support" title="Suporte via WhatsApp">
