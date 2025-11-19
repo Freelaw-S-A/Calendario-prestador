@@ -247,7 +247,6 @@
 
         .dashboard-header {
             margin-bottom: var(--spacing-md);
-            text-align: left;
             position: fixed;
             top: 98px;
             left: 0;
@@ -256,25 +255,29 @@
             z-index: 99;
             padding: var(--spacing-md) 56px;
             border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
         .welcome-text {
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 500;
             letter-spacing: -0.022em;
-            margin: 0 0 8px 0;
-            color: #FFFFFF;
+            margin: 0;
+            color: #9CA3AF;
+            text-align: right;
         }
 
         /* Barra de Notificação Fina no Topo */
         .warning-text {
             color: var(--accent-gold);
-            font-size: 13px;
+            font-size: 12px;
             line-height: 1.4;
             margin: 0;
-            padding: 12px 0;
+            padding: 0;
             background: transparent;
-            text-align: center;
+            text-align: left;
             display: block;
             width: 100%;
             font-weight: 400;
@@ -467,8 +470,8 @@
         /* Dashboard Layout */
         .dashboard-content {
             display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 40px;
+            grid-template-columns: 240px 1fr;
+            gap: 48px;
             padding-top: 200px;
             padding-left: 56px;
             padding-right: 56px;
@@ -478,13 +481,13 @@
         .dashboard-sidebar {
             display: flex;
             flex-direction: column;
-            gap: 32px;
+            gap: 24px;
         }
 
         .sidebar-metrics {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 12px;
         }
 
 
@@ -497,7 +500,7 @@
 
         .metric-card {
             background: transparent;
-            padding: 32px 0;
+            padding: 24px 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -506,7 +509,7 @@
         }
 
         .metric-label {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 500;
             color: #6B7280;
             text-transform: uppercase;
@@ -515,7 +518,7 @@
         }
 
         .metric-value {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 700;
             color: var(--text-primary);
             line-height: 1;
