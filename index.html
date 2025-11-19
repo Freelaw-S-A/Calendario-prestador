@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freelaw - Painel do Prestador</title>
+    <title>Freelaw - Painel do Prestador(a)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -73,6 +73,16 @@
             width: auto;
             object-fit: contain;
             filter: brightness(1.2);
+        }
+
+        .logo-subtitle {
+            margin-left: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            opacity: 0.9;
         }
 
         /* Login Section */
@@ -429,39 +439,40 @@
 
         /* Sidebar */
         .sidebar {
-            background: #FFFFFF;
+            background: #000000;
             border-radius: var(--radius-md);
             padding: var(--spacing-lg);
             height: fit-content;
             position: sticky;
             top: 100px;
-        }
-
-        .sidebar-nav {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-xs);
-            margin-bottom: var(--spacing-lg);
-            padding-bottom: var(--spacing-lg);
-            border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .sidebar-stats {
             display: flex;
             flex-direction: column;
             gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
         }
 
         .sidebar-link {
             padding: 14px 16px;
             background: transparent;
             border-radius: var(--radius-sm);
-            color: #000000;
+            color: var(--text-primary);
             text-decoration: none;
             font-size: 14px;
             font-weight: 600;
             transition: all 0.2s cubic-bezier(0.28, 0.11, 0.32, 1);
-            border: 2px solid transparent;
+            border: 2px solid rgba(255, 255, 255, 0.1);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -469,14 +480,15 @@
         }
 
         .sidebar-link:hover {
-            background: rgba(85, 39, 173, 0.08);
+            background: rgba(85, 39, 173, 0.15);
+            border-color: rgba(85, 39, 173, 0.3);
             transform: translateX(2px);
         }
 
         .sidebar-link:focus {
             outline: none;
             border-color: var(--accent-purple);
-            background: rgba(85, 39, 173, 0.05);
+            background: rgba(85, 39, 173, 0.1);
         }
 
         .sidebar-link.active {
@@ -513,23 +525,23 @@
 
 
         .stat-card {
-            background: rgba(85, 39, 173, 0.05);
+            background: rgba(85, 39, 173, 0.1);
             border-radius: var(--radius-sm);
             padding: 16px;
-            border: 2px solid rgba(85, 39, 173, 0.15);
+            border: 2px solid rgba(85, 39, 173, 0.3);
             transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
             position: relative;
         }
 
         .stat-card:hover {
             border-color: var(--accent-purple);
-            background: rgba(85, 39, 173, 0.08);
+            background: rgba(85, 39, 173, 0.15);
             transform: translateX(2px);
         }
 
         .stat-label {
             font-size: 10px;
-            color: #666;
+            color: var(--text-secondary);
             margin-bottom: 6px;
             text-transform: uppercase;
             letter-spacing: 0.08em;
@@ -539,7 +551,7 @@
         .stat-value {
             font-size: 28px;
             font-weight: 800;
-            color: var(--accent-purple);
+            color: var(--accent-gold);
             letter-spacing: -0.02em;
         }
 
@@ -1004,6 +1016,7 @@
             <div class="header-content">
                 <div class="logo">
                     <img src="logo.png" alt="Freelaw">
+                    <span class="logo-subtitle">Gestão de Entregas</span>
                 </div>
                 <a href="https://app.freelaw.work/login" target="_blank" class="btn-entrega btn-entrega-header">Faça sua entrega</a>
             </div>
@@ -1012,7 +1025,7 @@
         <!-- Login Section -->
         <section class="login-section" id="loginSection" role="main" aria-label="Área de login">
             <div class="login-card">
-                <h1 class="login-title">Painel do Prestador</h1>
+                <h1 class="login-title">Painel do Prestador(a)</h1>
                 <p class="login-subtitle">Acesse seu calendário de entregas</p>
                 <form id="loginForm" aria-label="Formulário de acesso">
                     <div class="input-group">
@@ -1028,9 +1041,9 @@
                             autocomplete="email"
                             required
                         >
-                        <span id="emailHelp" class="sr-only">Digite seu e-mail cadastrado como prestador</span>
+                        <span id="emailHelp" class="sr-only">Digite seu e-mail cadastrado como prestador(a)</span>
                     </div>
-                    <button type="submit" class="btn-primary" aria-label="Acessar painel do prestador">Acessar Painel</button>
+                    <button type="submit" class="btn-primary" aria-label="Acessar painel do prestador(a)">Acessar Painel</button>
                 </form>
             </div>
 
@@ -1054,7 +1067,7 @@
             <div class="dashboard-header">
                 <button class="btn-logout" id="logoutBtn">Sair</button>
                 <h1 class="welcome-text" id="welcomeText">Bem-vindo(a)!</h1>
-                <p class="warning-text">⚠️ Verifique com atenção todas as datas de entregas, pois os atrasos podem prejudicar sua permanência como prestador na plataforma da Freelaw.</p>
+                <p class="warning-text">⚠️ Verifique com atenção todas as datas de entregas, pois os atrasos podem prejudicar sua permanência como prestador(a) na plataforma da Freelaw.</p>
             </div>
 
             <div class="dashboard-content">
