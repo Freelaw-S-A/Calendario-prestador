@@ -758,7 +758,8 @@
         /* Legend */
         .calendar-legend {
             display: flex;
-            gap: var(--spacing-md);
+            justify-content: center;
+            gap: 32px;
             margin-top: var(--spacing-lg);
             padding-top: var(--spacing-md);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -1153,34 +1154,32 @@
 
             userEmail = document.getElementById('emailInput').value.trim().toLowerCase();
 
-            try {
-                // Mostrar loading
-                submitBtn.textContent = 'Carregando...';
-                submitBtn.disabled = true;
+            // Mostrar loading
+            submitBtn.textContent = 'Carregando...';
+            submitBtn.disabled = true;
 
-                // Buscar dados do prestador
-                console.log('📊 Buscando dados para:', userEmail);
-                sampleEvents = await fetchPrestadorData(userEmail);
+            // Buscar dados do prestador
+            console.log('📊 Buscando dados para:', userEmail);
+            sampleEvents = await fetchPrestadorData(userEmail);
+
+            if (sampleEvents.length === 0) {
+                console.warn('⚠️ Nenhuma entrega encontrada para este e-mail. Mostrando dashboard vazio.');
+            } else {
                 console.log('✅ Dados carregados! Total de entregas:', sampleEvents.length);
-
-                // Mostrar dashboard
-                document.getElementById('loginSection').style.display = 'none';
-                document.getElementById('dashboard').classList.add('active');
-                document.getElementById('welcomeText').textContent = `Prestador(a): ${userEmail}`;
-                document.getElementById('logoutBtnHeader').style.display = 'block';
-
-                initDashboard();
-
-                // Log das variáveis preenchidas
-                console.log('📋 Variáveis preenchidas com sucesso:');
-                console.log('   - sampleEvents:', sampleEvents.length, 'entregas');
-                console.log('   - userEmail:', userEmail);
-            } catch (error) {
-                console.error('❌ Erro ao carregar dados:', error);
-                alert('Erro ao carregar dados do Metabase. Verifique o console para mais detalhes.');
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
             }
+
+            // Mostrar dashboard
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('dashboard').classList.add('active');
+            document.getElementById('welcomeText').textContent = `Prestador(a): ${userEmail}`;
+            document.getElementById('logoutBtnHeader').style.display = 'block';
+
+            initDashboard();
+
+            // Log das variáveis preenchidas
+            console.log('📋 Variáveis preenchidas com sucesso:');
+            console.log('   - sampleEvents:', sampleEvents.length, 'entregas');
+            console.log('   - userEmail:', userEmail);
         });
 
         // Logout
