@@ -15,27 +15,31 @@
         }
 
         :root {
-            --bg-primary: #000000;
-            --bg-surface: #1d1d1f;
-            --text-primary: #f5f5f7;
-            --text-secondary: #a1a1a6;
-            --accent-purple: #5527ad;
-            --accent-gold: #ECB43D;
+            --bg-primary: #0F0F11;
+            --bg-surface: #1A1A1D;
+            --bg-elevated: #242428;
+            --text-primary: #E8E8E8;
+            --text-secondary: #9CA3AF;
+            --accent-purple: #7C3AED;
+            --accent-gold: #F59E0B;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-medium: rgba(255, 255, 255, 0.1);
             --spacing-xs: 8px;
             --spacing-sm: 16px;
             --spacing-md: 24px;
             --spacing-lg: 48px;
             --spacing-xl: 80px;
-            --radius-sm: 12px;
-            --radius-md: 20px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
             --radius-pill: 980px;
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #000000;
+            background: var(--bg-primary);
             color: var(--text-primary);
-            line-height: 1.47;
+            line-height: 1.6;
             min-height: 100vh;
         }
 
@@ -48,11 +52,11 @@
         /* Header */
         .header {
             padding: var(--spacing-md) 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: var(--spacing-xl);
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: var(--spacing-md);
             position: sticky;
             top: 0;
-            background: #000000;
+            background: var(--bg-primary);
             z-index: 100;
             backdrop-filter: blur(10px);
         }
@@ -245,18 +249,20 @@
             color: #FFFFFF;
         }
 
+        /* Barra de Notificação Fina no Topo */
         .warning-text {
-            color: #fbbf24;
-            font-size: 12px;
-            line-height: 1.5;
-            margin: 0;
-            padding: 10px 14px;
-            background: rgba(251, 191, 36, 0.06);
-            border-left: 3px solid #fbbf24;
-            border-radius: 6px;
-            text-align: left;
-            display: inline-block;
-            max-width: 100%;
+            color: var(--accent-gold);
+            font-size: 13px;
+            line-height: 1.4;
+            margin: 0 0 var(--spacing-md) 0;
+            padding: 12px var(--spacing-md);
+            background: rgba(245, 158, 11, 0.08);
+            border-left: 3px solid var(--accent-gold);
+            border-radius: var(--radius-sm);
+            text-align: center;
+            display: block;
+            width: 100%;
+            font-weight: 500;
         }
 
         .btn-logout {
@@ -446,73 +452,108 @@
         /* Dashboard Layout */
         .dashboard-content {
             display: grid;
-            grid-template-columns: 260px 1fr;
-            gap: var(--spacing-lg);
+            grid-template-columns: 220px 1fr;
+            gap: var(--spacing-md);
         }
 
-        /* Sidebar */
-        .sidebar {
-            background: #000000;
+        /* Bloco de Métricas Horizontal */
+        .metrics-bar {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .metric-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
             border-radius: var(--radius-md);
-            padding: var(--spacing-lg);
+            padding: var(--spacing-md);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .metric-card:hover {
+            border-color: var(--border-medium);
+            transform: translateY(-1px);
+        }
+
+        .metric-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        .metric-card.urgent .metric-value {
+            color: var(--accent-gold);
+        }
+
+        .metric-card.pending .metric-value {
+            color: var(--accent-purple);
+        }
+
+        /* Sidebar - Apenas Navegação */
+        .sidebar {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-sm);
             height: fit-content;
             position: sticky;
             top: 100px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .sidebar-stats {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-lg);
-            padding-bottom: var(--spacing-lg);
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
         }
 
         .sidebar-nav {
             display: flex;
             flex-direction: column;
-            gap: var(--spacing-xs);
+            gap: 4px;
         }
 
         .sidebar-link {
-            padding: 14px 16px;
+            padding: 12px 14px;
             background: transparent;
             border-radius: var(--radius-sm);
-            color: var(--text-primary);
+            color: var(--text-secondary);
             text-decoration: none;
             font-size: 14px;
-            font-weight: 600;
-            transition: all 0.2s cubic-bezier(0.28, 0.11, 0.32, 1);
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            font-weight: 500;
+            transition: all 0.15s ease;
+            border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .sidebar-link:hover {
-            background: rgba(85, 39, 173, 0.15);
-            border-color: rgba(85, 39, 173, 0.3);
-            transform: translateX(2px);
+            background: var(--bg-elevated);
+            color: var(--text-primary);
         }
 
         .sidebar-link:focus {
             outline: none;
-            border-color: var(--accent-purple);
-            background: rgba(85, 39, 173, 0.1);
+            background: var(--bg-elevated);
         }
 
         .sidebar-link.active {
             background: var(--accent-purple);
             color: #FFFFFF;
-            border-color: var(--accent-purple);
         }
 
         .sidebar-link.active:hover {
-            background: #6b3cc0;
-            border-color: #6b3cc0;
+            background: var(--accent-purple);
+            opacity: 0.9;
         }
 
         .sidebar-link svg {
@@ -537,122 +578,23 @@
         }
 
 
-        .stat-card {
-            background: rgba(85, 39, 173, 0.1);
-            border-radius: var(--radius-sm);
-            padding: 16px;
-            border: 2px solid rgba(85, 39, 173, 0.3);
-            transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
-            position: relative;
-        }
+        /* CSS antigo removido - usar metric-card, metric-label, metric-value */
 
-        .stat-card:hover {
-            border-color: var(--accent-purple);
-            background: rgba(85, 39, 173, 0.15);
-            transform: translateX(2px);
-        }
-
-        .stat-label {
-            font-size: 10px;
-            color: var(--text-secondary);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            font-weight: 600;
-        }
-
-        .stat-value {
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--accent-gold);
-            letter-spacing: -0.02em;
-        }
-
-        /* Alerta vermelho para prazo urgente */
-        .stat-card.urgent {
-            border-color: #ff4444;
-            background: rgba(255, 68, 68, 0.1);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .stat-card.urgent .stat-value {
-            color: #ff4444;
-        }
-
-        .stat-card.urgent .stat-label {
-            color: #ff4444;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.4);
-            }
-            50% {
-                box-shadow: 0 0 20px 10px rgba(255, 68, 68, 0);
-            }
-        }
-
-        /* Tooltip para stat-card */
-        .stat-tooltip {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%) translateY(8px);
-            background: var(--bg-surface);
-            border: 1px solid var(--accent-gold);
-            border-radius: var(--radius-sm);
-            padding: 16px;
-            min-width: 250px;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
-            pointer-events: none;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-        }
-
-        .stat-card:hover .stat-tooltip {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(4px);
-        }
-
-        .stat-tooltip-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--accent-gold);
-            margin-bottom: 8px;
-        }
-
-        .stat-tooltip-info {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
-        }
-
-        .stat-tooltip-date {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        /* Calendar */
+        /* Calendar - Limpo e Integrado */
         .calendar-section {
-            background: linear-gradient(135deg, rgba(29, 29, 31, 0.7) 0%, rgba(29, 29, 31, 0.95) 100%);
-            border-radius: var(--radius-md);
-            padding: var(--spacing-xl);
-            border: 2px solid rgba(85, 39, 173, 0.3);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
+            border: none;
         }
 
         .calendar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: var(--spacing-xl);
-            padding-bottom: var(--spacing-lg);
-            border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--border-subtle);
         }
 
         .calendar-title {
@@ -669,31 +611,29 @@
 
         .btn-nav {
             padding: 10px 18px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
             border-radius: var(--radius-sm);
             color: var(--text-primary);
             cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.28, 0.11, 0.32, 1);
+            transition: all 0.15s ease;
             font-family: 'Inter', sans-serif;
-            font-weight: 600;
+            font-weight: 500;
             font-size: 14px;
         }
 
         .btn-nav:hover {
-            border-color: var(--accent-purple);
-            background: rgba(85, 39, 173, 0.15);
-            transform: translateY(-1px);
+            border-color: var(--border-medium);
+            background: var(--bg-elevated);
         }
 
         .btn-nav:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(85, 39, 173, 0.2);
+            border-color: var(--accent-purple);
         }
 
         .btn-nav:active {
-            transform: translateY(0);
-            background: rgba(85, 39, 173, 0.2);
+            background: var(--bg-surface);
         }
 
         .calendar-grid {
@@ -718,40 +658,36 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 2px solid rgba(255, 255, 255, 0.08);
+            padding: 14px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
             border-radius: var(--radius-sm);
             cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.28, 0.11, 0.32, 1);
+            transition: all 0.15s ease;
             position: relative;
-            min-height: 70px;
+            min-height: 80px;
         }
 
         .calendar-day:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.25);
-            transform: scale(1.05);
+            background: var(--bg-elevated);
+            border-color: var(--border-medium);
         }
 
         .calendar-day.other-month {
-            opacity: 0.25;
+            opacity: 0.3;
         }
 
         .calendar-day.today {
             border-color: var(--accent-gold);
-            background: rgba(236, 180, 61, 0.15);
-            box-shadow: 0 0 20px rgba(236, 180, 61, 0.3);
+            background: rgba(245, 158, 11, 0.08);
         }
 
         .calendar-day.has-events {
-            background: rgba(220, 38, 38, 0.35);
-            border-color: rgba(220, 38, 38, 0.6);
+            /* Sem preenchimento total - apenas dots indicam eventos */
         }
 
         .calendar-day.has-events:hover {
-            background: rgba(220, 38, 38, 0.45);
-            border-color: rgba(220, 38, 38, 0.8);
+            background: var(--bg-elevated);
         }
 
         .day-number {
@@ -1086,20 +1022,8 @@
             </div>
 
             <div class="dashboard-content">
-                <!-- Sidebar -->
+                <!-- Sidebar - Apenas Navegação -->
                 <aside class="sidebar" role="navigation" aria-label="Filtros de entregas">
-                    <!-- Stats na Sidebar -->
-                    <div class="sidebar-stats">
-                        <div class="stat-card" id="proximoPrazoCard">
-                            <div class="stat-label">Próximo Prazo</div>
-                            <div class="stat-value" id="statProximo">--</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Entregas Pendentes</div>
-                            <div class="stat-value" id="statEntregas">0</div>
-                        </div>
-                    </div>
-
                     <nav class="sidebar-nav">
                         <a
                             class="sidebar-link active"
@@ -1139,6 +1063,17 @@
 
                 <!-- Main Content -->
                 <div class="main-content">
+                    <!-- Métricas em Bloco Horizontal -->
+                    <div class="metrics-bar">
+                        <div class="metric-card urgent" id="proximoPrazoCard">
+                            <div class="metric-label">Próximo Prazo</div>
+                            <div class="metric-value" id="statProximo">--</div>
+                        </div>
+                        <div class="metric-card pending">
+                            <div class="metric-label">Entregas Pendentes</div>
+                            <div class="metric-value" id="statEntregas">0</div>
+                        </div>
+                    </div>
 
             <!-- Calendar -->
             <div class="calendar-section">
