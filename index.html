@@ -549,6 +549,8 @@
             border-radius: 0;
             padding: 0;
             border: none;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .calendar-header {
@@ -606,7 +608,7 @@
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 12px;
+            gap: 16px;
         }
 
         .calendar-day-header {
@@ -771,6 +773,7 @@
             gap: var(--spacing-xs);
             font-size: 14px;
             color: var(--text-secondary);
+            white-space: nowrap;
         }
 
         .legend-dot {
