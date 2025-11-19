@@ -236,7 +236,12 @@
         .dashboard-header {
             margin-bottom: var(--spacing-md);
             text-align: left;
-            position: relative;
+            position: sticky;
+            top: 0;
+            background: var(--bg-primary);
+            z-index: 99;
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--border-subtle);
         }
 
         .welcome-text {
