@@ -1491,6 +1491,60 @@
 
         // Aplicar aos botões de filtro
         setupFilters('.filter-btn');
+
+        // Verificar se há parâmetro de email na URL ao carregar a página
+        async function checkURLParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const emailFromURL = urlParams.get('email');
+
+            if (emailFromURL) {
+                console.log('📧 E-mail detectado na URL:', emailFromURL);
+
+                // Preencher o campo de e-mail (caso usuário queira ver)
+                document.getElementById('emailInput').value = emailFromURL;
+
+                // Carregar dados automaticamente
+                userEmail = emailFromURL.trim().toLowerCase();
+
+                try {
+                    // Mostrar loading na tela de login
+                    const loginSection = document.getElementById('loginSection');
+                    const loadingMsg = document.createElement('p');
+                    loadingMsg.style.cssText = 'color: var(--accent-gold); margin-top: 20px; text-align: center;';
+                    loadingMsg.textContent = 'Carregando suas entregas...';
+                    loginSection.appendChild(loadingMsg);
+
+                    // Buscar dados do prestador
+                    console.log('📊 Buscando dados para:', userEmail);
+                    sampleEvents = await fetchPrestadorData(userEmail);
+
+                    if (sampleEvents.length === 0) {
+                        console.warn('⚠️ Nenhuma entrega encontrada para este e-mail. Mostrando dashboard vazio.');
+                    } else {
+                        console.log('✅ Dados carregados! Total de entregas:', sampleEvents.length);
+                    }
+
+                    // Mostrar dashboard
+                    document.getElementById('loginSection').style.display = 'none';
+                    document.getElementById('dashboard').classList.add('active');
+                    document.getElementById('welcomeText').textContent = `Prestador(a): ${userEmail}`;
+                    document.getElementById('logoutBtnHeader').style.display = 'block';
+
+                    initDashboard();
+
+                    // Log das variáveis preenchidas
+                    console.log('📋 Dashboard carregado via URL com sucesso');
+                    console.log('   - sampleEvents:', sampleEvents.length, 'entregas');
+                    console.log('   - userEmail:', userEmail);
+                } catch (error) {
+                    console.error('❌ Erro ao carregar dados via URL:', error);
+                    alert('Erro ao carregar dados. Por favor, faça login manualmente.');
+                }
+            }
+        }
+
+        // Executar verificação ao carregar a página
+        window.addEventListener('DOMContentLoaded', checkURLParams);
     </script>
 </body>
 </html>
