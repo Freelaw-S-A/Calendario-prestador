@@ -830,13 +830,49 @@
             background: rgba(236, 180, 61, 0.5);
         }
 
-        .events-title {
-            font-size: 20px;
-            font-weight: 700;
+        .events-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: var(--spacing-md);
             padding-bottom: var(--spacing-sm);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .events-title {
+            font-size: 20px;
+            font-weight: 700;
             color: var(--text-primary);
+            margin: 0;
+        }
+
+        .events-filters {
+            display: flex;
+            gap: 8px;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .filter-btn:hover {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            border-color: var(--border-medium);
+        }
+
+        .filter-btn.active {
+            background: var(--accent-purple);
+            color: #FFFFFF;
+            border-color: var(--accent-purple);
         }
 
         .event-item {
@@ -1126,7 +1162,14 @@
 
                     <!-- Events List -->
                     <div class="events-section">
-                        <h2 class="events-title">Próximas Entregas</h2>
+                        <div class="events-header">
+                            <h2 class="events-title">Próximas Entregas</h2>
+                            <div class="events-filters">
+                                <button class="filter-btn active" data-filter="all">Todas as entregas</button>
+                                <button class="filter-btn" data-filter="entrega">Entregas 1ª versão</button>
+                                <button class="filter-btn" data-filter="revisao">Revisões</button>
+                            </div>
+                        </div>
                         <div id="eventsList"></div>
                     </div>
                 </div>
@@ -1594,40 +1637,38 @@
             renderCalendar();
         });
 
-        // Filtro da sidebar
-        document.querySelectorAll('.sidebar-link').forEach(link => {
-            // Função de ativação de filtro
-            const activateFilter = function(e) {
-                e.preventDefault();
-
-                // Remover classe active e atualizar aria-pressed de todos os links
-                document.querySelectorAll('.sidebar-link').forEach(l => {
-                    l.classList.remove('active');
-                    l.setAttribute('aria-pressed', 'false');
-                });
-
-                // Adicionar classe active e atualizar aria-pressed no link clicado
-                this.classList.add('active');
-                this.setAttribute('aria-pressed', 'true');
-
-                // Atualizar filtro atual
-                currentFilter = this.getAttribute('data-filter');
-
-                // Re-renderizar lista de eventos
-                renderEventsList();
-            };
-
-            // Evento de click
-            link.addEventListener('click', activateFilter);
-
-            // Suporte para navegação por teclado (Enter e Space)
-            link.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
+        // Filtro da sidebar e dos botões
+        const setupFilters = (selector) => {
+            document.querySelectorAll(selector).forEach(elem => {
+                elem.addEventListener('click', function(e) {
                     e.preventDefault();
-                    activateFilter.call(this, e);
-                }
+
+                    // Remover classe active de todos os elementos do mesmo tipo
+                    document.querySelectorAll(selector).forEach(el => {
+                        el.classList.remove('active');
+                        if (el.hasAttribute('aria-pressed')) {
+                            el.setAttribute('aria-pressed', 'false');
+                        }
+                    });
+
+                    // Adicionar classe active no elemento clicado
+                    this.classList.add('active');
+                    if (this.hasAttribute('aria-pressed')) {
+                        this.setAttribute('aria-pressed', 'true');
+                    }
+
+                    // Atualizar filtro atual
+                    currentFilter = this.getAttribute('data-filter');
+
+                    // Re-renderizar lista de eventos
+                    renderEventsList();
+                });
             });
-        });
+        };
+
+        // Aplicar aos links da sidebar e aos botões de filtro
+        setupFilters('.sidebar-link');
+        setupFilters('.filter-btn');
     </script>
 </body>
 </html>
