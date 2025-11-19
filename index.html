@@ -469,11 +469,11 @@
         /* Dashboard Layout */
         .dashboard-content {
             display: grid;
-            grid-template-columns: 240px 1fr;
-            gap: 48px;
+            grid-template-columns: 180px 1fr;
+            gap: 80px;
             padding-top: 200px;
-            padding-left: 56px;
-            padding-right: 56px;
+            padding-left: 120px;
+            padding-right: 120px;
         }
 
         /* Dashboard Sidebar */
@@ -482,7 +482,7 @@
             flex-direction: column;
             gap: 24px;
             padding-left: 0;
-            margin-left: -40px;
+            margin-left: -100px;
         }
 
         .sidebar-metrics {
@@ -519,8 +519,8 @@
         }
 
         .metric-value {
-            font-size: 28px;
-            font-weight: 700;
+            font-size: 44px;
+            font-weight: 900;
             color: var(--text-primary);
             line-height: 1;
             text-align: left;
@@ -992,10 +992,13 @@
             .dashboard-content {
                 grid-template-columns: 1fr;
                 gap: 24px;
+                padding-left: 20px;
+                padding-right: 20px;
             }
 
             .dashboard-sidebar {
                 gap: 24px;
+                margin-left: 0;
             }
         }
     </style>
