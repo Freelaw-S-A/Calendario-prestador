@@ -883,6 +883,21 @@
             }
         }
     </style>
+    <script>
+        // Verificar parâmetro de email antes da página carregar
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const emailFromURL = urlParams.get('email');
+
+            if (emailFromURL) {
+                // Esconder login e mostrar dashboard imediatamente
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.getElementById('loginSection').style.display = 'none';
+                    document.getElementById('dashboard').style.display = 'block';
+                });
+            }
+        })();
+    </script>
 </head>
 <body>
     <div class="container">
@@ -1500,18 +1515,8 @@
             if (emailFromURL) {
                 console.log('📧 E-mail detectado na URL:', emailFromURL);
 
-                // Preencher o campo de e-mail (caso usuário queira ver)
-                document.getElementById('emailInput').value = emailFromURL;
-
                 // Carregar dados automaticamente
                 userEmail = emailFromURL.trim().toLowerCase();
-
-                // Mostrar loading na tela de login
-                const loginSection = document.getElementById('loginSection');
-                const loadingMsg = document.createElement('p');
-                loadingMsg.style.cssText = 'color: var(--accent-gold); margin-top: 20px; text-align: center;';
-                loadingMsg.textContent = 'Carregando suas entregas...';
-                loginSection.appendChild(loadingMsg);
 
                 // Buscar dados do prestador
                 console.log('📊 Buscando dados para:', userEmail);
@@ -1523,8 +1528,7 @@
                     console.log('✅ Dados carregados! Total de entregas:', sampleEvents.length);
                 }
 
-                // Mostrar dashboard (sempre, mesmo sem dados)
-                document.getElementById('loginSection').style.display = 'none';
+                // Configurar dashboard
                 document.getElementById('dashboard').classList.add('active');
                 document.getElementById('welcomeText').textContent = `Prestador(a): ${userEmail}`;
                 document.getElementById('logoutBtnHeader').style.display = 'block';
