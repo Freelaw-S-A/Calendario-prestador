@@ -102,7 +102,7 @@
             display: none;
         }
 
-        /* Login Section - Fundo Suave */
+        /* Login Section */
         .login-section {
             display: flex;
             flex-direction: column;
@@ -111,19 +111,14 @@
             min-height: 100vh;
             text-align: center;
             padding-top: 60px;
-            background: #1A1A1A;
+            background: #000000;
         }
 
-        /* Cartão Flutuante para Formulário */
         .login-card {
-            background: rgba(42, 42, 46, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: var(--radius-lg);
+            background: transparent;
             padding: 56px 48px;
             max-width: 500px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
         }
 
         .login-title {
@@ -137,12 +132,14 @@
         }
 
         .login-subtitle {
-            color: #D1D5DB;
+            background: linear-gradient(135deg, #7C3AED 0%, #5527AD 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 48px;
             font-size: 17px;
             line-height: 1.5;
             font-weight: 400;
-            opacity: 0.9;
         }
 
         .input-group {
@@ -162,8 +159,8 @@
         .input-field {
             width: 100%;
             padding: 16px 20px;
-            background: #2D2D30;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: var(--radius-sm);
             color: var(--text-primary);
             font-size: 16px;
@@ -172,15 +169,15 @@
         }
 
         .input-field:hover {
-            border-color: rgba(255, 255, 255, 0.2);
-            background: #333336;
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .input-field:focus {
             outline: none;
             border-color: var(--accent-gold);
-            background: #333336;
-            box-shadow: 0 0 0 4px rgba(236, 180, 61, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
         }
 
         .input-field::placeholder {
@@ -191,11 +188,10 @@
             border-color: #ff4444;
         }
 
-        /* Botão CTA - Destaque Amarelo/Laranja */
         .btn-primary {
             width: 100%;
             padding: 18px 32px;
-            background: linear-gradient(135deg, #F59E0B 0%, #F97316 100%);
+            background: var(--accent-gold);
             color: #000000;
             border: none;
             border-radius: var(--radius-md);
@@ -204,20 +200,17 @@
             cursor: pointer;
             transition: all 0.2s ease;
             margin-top: 16px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.5);
-            background: linear-gradient(135deg, #FBBF24 0%, #FB923C 100%);
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.4);
+            background: #f5c550;
         }
 
         .btn-primary:active {
             transform: translateY(0);
-            background: linear-gradient(135deg, #D97706 0%, #EA580C 100%);
+            background: #d9a730;
         }
 
         .btn-primary:focus {
@@ -308,11 +301,11 @@
             right: 24px;
             width: 60px;
             height: 60px;
-            background: #25D366;
+            background: var(--accent-purple);
             border: none;
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
             transition: all 0.2s cubic-bezier(0.28, 0.11, 0.32, 1);
             z-index: 1000;
             display: flex;
@@ -322,13 +315,13 @@
 
         .btn-support:hover {
             transform: scale(1.1);
-            box-shadow: 0 8px 32px rgba(37, 211, 102, 0.6);
-            background: #20ba5a;
+            box-shadow: 0 8px 32px rgba(124, 58, 237, 0.6);
+            background: #6D28D9;
         }
 
         .btn-support:focus {
             outline: none;
-            box-shadow: 0 0 0 4px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.3);
         }
 
         .btn-support:active {
@@ -477,6 +470,8 @@
             padding: var(--spacing-md);
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
             gap: 8px;
             transition: all 0.2s ease;
         }
@@ -492,6 +487,7 @@
             color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            text-align: center;
         }
 
         .metric-value {
@@ -499,6 +495,7 @@
             font-weight: 700;
             color: var(--text-primary);
             line-height: 1;
+            text-align: center;
         }
 
         .metric-card.urgent .metric-value {
@@ -982,11 +979,11 @@
         <!-- Login Section -->
         <section class="login-section" id="loginSection" role="main" aria-label="Área de login">
             <div class="login-card">
-                <h1 class="login-title">Acessar Painel</h1>
-                <p class="login-subtitle">Digite seu e-mail para receber o link de acesso ao seu calendário de entregas</p>
+                <h1 class="login-title">Painel do Prestador</h1>
+                <p class="login-subtitle">Acesse seu calendário de entregas</p>
                 <form id="loginForm" aria-label="Formulário de acesso">
                     <div class="input-group">
-                        <label class="input-label" for="emailInput">Seu e-mail cadastrado</label>
+                        <label class="input-label" for="emailInput">E-mail</label>
                         <input
                             type="email"
                             class="input-field"
@@ -998,9 +995,9 @@
                             autocomplete="email"
                             required
                         >
-                        <span id="emailHelp" class="sr-only">Digite seu e-mail cadastrado como prestador(a) para receber o link de acesso</span>
+                        <span id="emailHelp" class="sr-only">Digite seu e-mail cadastrado como prestador(a)</span>
                     </div>
-                    <button type="submit" class="btn-primary" aria-label="Enviar link de acesso por e-mail">Receber Link de Acesso</button>
+                    <button type="submit" class="btn-primary" aria-label="Acessar painel de entregas">Acessar Painel</button>
                 </form>
             </div>
 
@@ -1293,7 +1290,7 @@
                 // Mostrar dashboard
                 document.getElementById('loginSection').style.display = 'none';
                 document.getElementById('dashboard').classList.add('active');
-                document.getElementById('welcomeText').textContent = `Bem-vindo(a), ${userEmail}!`;
+                document.getElementById('welcomeText').textContent = `Gestão de Entregas - ${userEmail}`;
 
                 initDashboard();
 
@@ -1564,11 +1561,9 @@
                             month: 'long',
                             year: 'numeric',
                             hour: '2-digit',
-                            minute: '2-digit'
+                            minute: '2-digit',
+                            second: '2-digit'
                         })}</div>
-                    </div>
-                    <div class="event-type ${event.type}">
-                        ${event.type === 'entrega' ? 'Entrega' : 'Revisão'}
                     </div>
                 `;
 
