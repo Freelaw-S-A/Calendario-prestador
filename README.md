@@ -1,6 +1,6 @@
 # 📅 Calendário Prestador - Freelaw.
 
-Painel de prazos de entrega para prestadores da plataforma Freelaw.
+Painel de prazos de entrega para prestadores da plataforma Freelaw
 
 ## 🚀 Como fazer deploy na Vercel
 
