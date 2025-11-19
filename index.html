@@ -553,11 +553,12 @@
 
         .calendar-header {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             margin-bottom: var(--spacing-md);
             padding-bottom: var(--spacing-md);
             border-bottom: 1px solid var(--border-subtle);
+            position: relative;
         }
 
         .calendar-title {
@@ -571,6 +572,8 @@
         .calendar-nav {
             display: flex;
             gap: 8px;
+            position: absolute;
+            right: 0;
         }
 
         .btn-nav {
