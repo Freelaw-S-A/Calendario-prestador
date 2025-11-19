@@ -54,8 +54,10 @@
             padding: var(--spacing-md) 0;
             border-bottom: 1px solid var(--border-subtle);
             margin-bottom: var(--spacing-md);
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             background: var(--bg-primary);
             z-index: 100;
             backdrop-filter: blur(10px);
@@ -114,7 +116,7 @@
 
         .login-card {
             background: transparent;
-            padding: 56px 0;
+            padding: 24px 0 56px 0;
             max-width: 600px;
             width: 100%;
             display: flex;
@@ -246,11 +248,13 @@
         .dashboard-header {
             margin-bottom: var(--spacing-md);
             text-align: left;
-            position: sticky;
+            position: fixed;
             top: 98px;
+            left: 0;
+            right: 0;
             background: var(--bg-primary);
             z-index: 99;
-            padding: var(--spacing-md) 0;
+            padding: var(--spacing-md) 22px;
             border-bottom: 1px solid var(--border-subtle);
         }
 
@@ -465,6 +469,7 @@
         /* Dashboard Layout */
         .dashboard-content {
             display: block;
+            padding-top: 200px;
         }
 
         /* Bloco de Métricas Horizontal */
@@ -952,6 +957,7 @@
                 </div>
                 <div class="header-right">
                     <a href="https://app.freelaw.work/login" target="_blank" class="btn-entrega btn-entrega-header">Faça sua entrega</a>
+                    <button class="btn-logout" id="logoutBtnHeader" style="display: none;">Sair</button>
                 </div>
             </div>
         </header>
@@ -999,7 +1005,6 @@
         <!-- Dashboard -->
         <section class="dashboard" id="dashboard">
             <div class="dashboard-header">
-                <button class="btn-logout" id="logoutBtn">Sair</button>
                 <h1 class="welcome-text" id="welcomeText">Bem-vindo(a)!</h1>
                 <p class="warning-text">⚠️ Verifique com atenção todas as datas de entregas, pois os atrasos podem prejudicar sua permanência como prestador(a) na plataforma da Freelaw.</p>
             </div>
@@ -1237,6 +1242,7 @@
                 document.getElementById('loginSection').style.display = 'none';
                 document.getElementById('dashboard').classList.add('active');
                 document.getElementById('welcomeText').textContent = `Prestador(a): ${userEmail}`;
+                document.getElementById('logoutBtnHeader').style.display = 'block';
 
                 initDashboard();
 
@@ -1253,10 +1259,11 @@
         });
 
         // Logout
-        document.getElementById('logoutBtn').addEventListener('click', function() {
+        document.getElementById('logoutBtnHeader').addEventListener('click', function() {
             document.getElementById('loginSection').style.display = 'flex';
             document.getElementById('dashboard').classList.remove('active');
             document.getElementById('emailInput').value = '';
+            document.getElementById('logoutBtnHeader').style.display = 'none';
         });
 
         function initDashboard() {
