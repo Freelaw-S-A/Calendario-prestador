@@ -641,14 +641,30 @@
         }
 
         .calendar-day.has-events {
-            border: 3px solid transparent;
-            border-image: linear-gradient(to bottom, #9B7AC7, #D4AA78) 1;
+            position: relative;
+            background: var(--bg-surface);
+            border: none;
+        }
+
+        .calendar-day.has-events::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-sm);
+            padding: 3px;
+            background: linear-gradient(to bottom, #9B7AC7, #D4AA78);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
         }
 
         .calendar-day.has-events:hover {
-            border: 3px solid transparent;
-            border-image: linear-gradient(to bottom, #A88AD7, #DEB888) 1;
             background: var(--bg-elevated);
+        }
+
+        .calendar-day.has-events:hover::before {
+            background: linear-gradient(to bottom, #A88AD7, #DEB888);
         }
 
         .day-number {
