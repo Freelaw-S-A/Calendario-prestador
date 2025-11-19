@@ -782,24 +782,12 @@
             backdrop-filter: blur(10px);
             max-height: 600px;
             overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
 
         .events-section::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .events-section::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 4px;
-        }
-
-        .events-section::-webkit-scrollbar-thumb {
-            background: rgba(236, 180, 61, 0.3);
-            border-radius: 4px;
-        }
-
-        .events-section::-webkit-scrollbar-thumb:hover {
-            background: rgba(236, 180, 61, 0.5);
+            display: none;
         }
 
         .events-header {
