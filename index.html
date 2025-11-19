@@ -553,31 +553,30 @@
 
         .calendar-header {
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
-            margin-bottom: var(--spacing-md);
-            padding-bottom: var(--spacing-md);
-            border-bottom: 1px solid var(--border-subtle);
-            position: relative;
+            margin-bottom: 24px;
+            padding: 16px 0;
         }
 
         .calendar-title {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 700;
             letter-spacing: -0.022em;
             color: var(--text-primary);
             white-space: nowrap;
+            flex: 1;
+            text-align: center;
         }
 
         .calendar-nav {
             display: flex;
-            gap: 8px;
-            position: absolute;
-            right: 0;
+            gap: 12px;
+            align-items: center;
         }
 
         .btn-nav {
-            padding: 10px 18px;
+            padding: 12px 20px;
             background: var(--bg-surface);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius-sm);
@@ -585,8 +584,9 @@
             cursor: pointer;
             transition: all 0.15s ease;
             font-family: 'Inter', sans-serif;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 14px;
+            min-width: 110px;
         }
 
         .btn-nav:hover {
@@ -778,126 +778,6 @@
             border-radius: 50%;
         }
 
-        /* Event List */
-        .events-section {
-            margin-top: var(--spacing-lg);
-            background: linear-gradient(135deg, rgba(29, 29, 31, 0.5) 0%, rgba(29, 29, 31, 0.8) 100%);
-            border-radius: var(--radius-sm);
-            padding: var(--spacing-md);
-            border: 1px solid rgba(236, 180, 61, 0.1);
-            backdrop-filter: blur(10px);
-            flex: 1;
-            overflow-y: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            min-height: 0;
-        }
-
-        .events-section::-webkit-scrollbar {
-            display: none;
-        }
-
-        .events-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--spacing-md);
-            padding-bottom: var(--spacing-sm);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .events-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin: 0;
-        }
-
-        .events-filters {
-            display: flex;
-            gap: 8px;
-        }
-
-        .filter-btn {
-            padding: 8px 16px;
-            background: transparent;
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-sm);
-            color: var(--text-secondary);
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.15s ease;
-        }
-
-        .filter-btn:hover {
-            background: var(--bg-elevated);
-            color: var(--text-primary);
-            border-color: var(--border-medium);
-        }
-
-        .filter-btn.active {
-            background: var(--accent-purple);
-            color: #FFFFFF;
-            border-color: var(--accent-purple);
-        }
-
-        .event-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 28px 32px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: var(--radius-sm);
-            margin-bottom: 12px;
-            border-left: 2px solid rgba(107, 114, 128, 0.2);
-            transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
-        }
-
-        .event-item:hover {
-            background: rgba(255, 255, 255, 0.06);
-            transform: translateX(4px);
-            border-left-color: rgba(107, 114, 128, 0.4);
-        }
-
-        .event-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .event-info {
-            flex: 1;
-        }
-
-        .event-title {
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .event-date {
-            font-size: 12px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .event-type {
-            padding: 4px 12px;
-            border-radius: var(--radius-pill);
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .event-type.entrega {
-            background: rgba(236, 180, 61, 0.2);
-            color: var(--accent-gold);
-        }
-
-        .event-type.revisao {
-            background: rgba(85, 39, 173, 0.2);
-            color: var(--accent-purple);
-        }
 
         /* Responsive */
         @media (max-width: 968px) {
@@ -1112,18 +992,6 @@
                         </div>
                     </div>
 
-                    <!-- Events List -->
-                    <div class="events-section">
-                        <div class="events-header">
-                            <h2 class="events-title">Lista de Entregas</h2>
-                            <div class="events-filters">
-                                <button class="filter-btn active" data-filter="all">Todas as entregas</button>
-                                <button class="filter-btn" data-filter="entrega">Entregas 1ª versão</button>
-                                <button class="filter-btn" data-filter="revisao">Revisões</button>
-                            </div>
-                        </div>
-                        <div id="eventsList"></div>
-                    </div>
                 </main>
             </div>
         </section>
