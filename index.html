@@ -1983,6 +1983,17 @@
         }
 
         function renderKanban() {
+            // Verificar se os elementos existem
+            const kanbanCountEntrega = document.getElementById('kanbanCountEntrega');
+            const kanbanCountRevisao = document.getElementById('kanbanCountRevisao');
+            const kanbanCardsEntrega = document.getElementById('kanbanCardsEntrega');
+            const kanbanCardsRevisao = document.getElementById('kanbanCardsRevisao');
+
+            if (!kanbanCountEntrega || !kanbanCountRevisao || !kanbanCardsEntrega || !kanbanCardsRevisao) {
+                console.warn('⚠️ Kanban - Elementos não encontrados no DOM ainda');
+                return;
+            }
+
             const now = new Date();
 
             // Usar getFilteredEvents() para respeitar os filtros ativos
@@ -1998,11 +2009,10 @@
             console.log('🔄 Kanban - Revisões:', revisoes.length);
 
             // Atualizar contadores
-            document.getElementById('kanbanCountEntrega').textContent = entregas.length;
-            document.getElementById('kanbanCountRevisao').textContent = revisoes.length;
+            kanbanCountEntrega.textContent = entregas.length;
+            kanbanCountRevisao.textContent = revisoes.length;
 
             // Renderizar cards de Entrega
-            const kanbanCardsEntrega = document.getElementById('kanbanCardsEntrega');
             kanbanCardsEntrega.innerHTML = '';
 
             if (entregas.length === 0) {
@@ -2015,7 +2025,6 @@
             }
 
             // Renderizar cards de Revisão
-            const kanbanCardsRevisao = document.getElementById('kanbanCardsRevisao');
             kanbanCardsRevisao.innerHTML = '';
 
             if (revisoes.length === 0) {
