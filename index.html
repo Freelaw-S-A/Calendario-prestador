@@ -1732,12 +1732,21 @@
         }
 
         function updateStats() {
+            // Verificar se elementos existem
+            const statEntregas = document.getElementById('statEntregas');
+            const proximoPrazoCard = document.getElementById('proximoPrazoCard');
+
+            if (!statEntregas || !proximoPrazoCard) {
+                console.warn('⚠️ UpdateStats - Elementos não encontrados no DOM ainda');
+                return;
+            }
+
             // Contar todas as entregas pendentes (futuras)
             const now = new Date();
             const eventosFiltrados = sampleEvents.filter(e => e.date >= now);
             const totalEntregas = eventosFiltrados.length;
 
-            document.getElementById('statEntregas').textContent = totalEntregas;
+            statEntregas.textContent = totalEntregas;
 
             const nextEvent = eventosFiltrados
                 .sort((a, b) => a.date - b.date)[0];
@@ -1746,7 +1755,7 @@
                 updateCountdown(nextEvent.date);
 
                 // Adicionar tooltip ao card de Próximo Prazo
-                const card = document.getElementById('proximoPrazoCard');
+                const card = proximoPrazoCard;
 
                 // Verificar se prazo é <= 24 horas e adicionar classe urgent
                 const now = new Date();
@@ -1792,11 +1801,18 @@
 
         function updateCountdown(targetDate) {
             const updateTimer = () => {
+                const statProximo = document.getElementById('statProximo');
+
+                if (!statProximo) {
+                    console.warn('⚠️ UpdateCountdown - Elemento statProximo não encontrado no DOM ainda');
+                    return;
+                }
+
                 const now = new Date();
                 const diff = targetDate - now;
 
                 if (diff <= 0) {
-                    document.getElementById('statProximo').textContent = '00:00:00';
+                    statProximo.textContent = '00:00:00';
                     return;
                 }
 
@@ -1812,7 +1828,7 @@
                     display = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                 }
 
-                document.getElementById('statProximo').textContent = display;
+                statProximo.textContent = display;
             };
 
             updateTimer();
@@ -1823,17 +1839,25 @@
             const year = currentDate.getFullYear();
             const month = currentDate.getMonth();
 
+            // Verificar se os elementos existem ANTES de acessá-los
+            const currentMonthEl = document.getElementById('currentMonth');
+            const calendarDays = document.getElementById('calendarDays');
+
+            if (!currentMonthEl || !calendarDays) {
+                console.warn('⚠️ Calendar - Elementos não encontrados no DOM ainda');
+                return;
+            }
+
             // Update month title
             const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
                                'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-            document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+            currentMonthEl.textContent = `${monthNames[month]} ${year}`;
 
             // Get first day of month and number of days
             const firstDay = new Date(year, month, 1).getDay();
             const daysInMonth = new Date(year, month + 1, 0).getDate();
             const daysInPrevMonth = new Date(year, month, 0).getDate();
 
-            const calendarDays = document.getElementById('calendarDays');
             calendarDays.innerHTML = '';
 
             // Previous month days
@@ -1943,6 +1967,12 @@
 
         function renderEventsList() {
             const eventsList = document.getElementById('eventsList');
+
+            if (!eventsList) {
+                console.warn('⚠️ EventsList - Elemento não encontrado no DOM ainda');
+                return;
+            }
+
             eventsList.innerHTML = '';
 
             console.log('📋 Total de eventos em sampleEvents:', sampleEvents.length);
@@ -2164,6 +2194,12 @@
             const modalTitle = document.getElementById('modalTitle');
             const modalBody = document.getElementById('modalBody');
 
+            // Verificar se os elementos existem
+            if (!modal || !modalTitle || !modalBody) {
+                console.warn('⚠️ Modal - Elementos não encontrados no DOM ainda');
+                return;
+            }
+
             // Formatar data
             const formattedDate = date.toLocaleDateString('pt-BR', {
                 day: '2-digit',
@@ -2208,6 +2244,12 @@
 
         function closeDayModal() {
             const modal = document.getElementById('dayModal');
+
+            if (!modal) {
+                console.warn('⚠️ CloseModal - Elemento dayModal não encontrado no DOM ainda');
+                return;
+            }
+
             modal.classList.remove('active');
         }
 
