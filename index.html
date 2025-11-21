@@ -1438,8 +1438,7 @@
 
         // Função auxiliar para filtrar eventos
         function getFilteredEvents() {
-            const dataCorte = new Date('2025-11-18T00:00:00');
-            let filtered = sampleEvents.filter(e => e.date >= dataCorte);
+            let filtered = sampleEvents;
 
             if (currentFilter === 'entrega') {
                 filtered = filtered.filter(e => e.type === 'entrega');
@@ -1501,11 +1500,9 @@
         }
 
         function updateStats() {
-            // Data de corte: 18/11/2025 00:00:00
-            const dataCorte = new Date('2025-11-18T00:00:00');
-
-            // Filtrar apenas prazos a partir de 18/11/2025
-            const eventosFiltrados = sampleEvents.filter(e => e.date >= dataCorte);
+            // Contar todas as entregas pendentes (futuras)
+            const now = new Date();
+            const eventosFiltrados = sampleEvents.filter(e => e.date >= now);
             const totalEntregas = eventosFiltrados.length;
 
             document.getElementById('statEntregas').textContent = totalEntregas;
