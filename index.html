@@ -1705,7 +1705,10 @@
             document.getElementById('welcomeText').textContent = `Prestador(a): ${userEmail}`;
             document.getElementById('logoutBtnHeader').style.display = 'block';
 
-            initDashboard();
+            // Aguardar DOM atualizar antes de inicializar
+            setTimeout(() => {
+                initDashboard();
+            }, 100);
 
             // Log das variáveis preenchidas
             console.log('📋 Variáveis preenchidas com sucesso:');
